@@ -3,11 +3,30 @@
  * 
  * Afficher et modifier les notes d'une ou plusieurs évaluations
  * 
+ * Champs du formulaire form_eval
+ * nombre
+ * - action[1]
+ * - csrf_alea[1]
+ * - eleve = array(array(array(note[1] , commentaire[1]))) * nb élèves
+ * - 2+(count($_SESSION[plugin_notes][tableau_notes])*((2*count($_SESSION[plugin_notes][tableau_notes][0]['notes']))))
+ * 
+ * tailles clés
+ * - action[6]
+ * - csrf_alea[9]
+ * - eleve = array(note[18] , commentaire[17])
+ * 
+ * longueur clés 
+ * 
  * @author Régis Bouguin
  * @package saisie_notes
  * @subpackage voir
  * 
  */
+
+if (!$suhosin_bon) {
+  charge_message('<span class=\'rouge\'>Les paramètres de votre serveur ne vous permettent pas d\'enregistrer autant d\'évaluations<span/>');
+  charge_message('<span class=\'rouge\'>Vous devez fermer une évaluation<span/>');
+}
 
 ?>
 
@@ -113,7 +132,8 @@ $num_eval=1;
 	   alt=""
 	   title="Évaluation visible sur le relevé de notes"/>
       <?php } ?>
-      <p style="font-size:smaller;margin: 0px;">
+      <br />
+      <span style="font-size:smaller;margin: 0px;">
 <?php 
   $note_sur_eval[$num_eval]=$affiche_note['note_sur'];
   $num_eval++;
@@ -121,7 +141,7 @@ $num_eval=1;
 	/<?php echo $affiche_note['note_sur']; ?>
 	-
 	coef : <?php echo $affiche_note['coef']; ?>
-      </p>
+      </span>
       
       <img src="<?php echo CHEMIN_IMAGES; ?>icons/histogramme.png"
 	   alt="Afficher"
@@ -249,7 +269,7 @@ que des notes et commentaires portés à la connaissance de l'élève
       </td>
   <?php foreach ($eval_valides as $affiche_note) {  ?>
       <td style="text-align: center">
-	<?php if (count($affiche_note['tab_notes'])> 0) echo max($affiche_note['tab_notes']); ?>
+	<?php if (count($affiche_note['tab_notes'])> 1) echo max($affiche_note['tab_notes']); ?>
       </td>
   <?php }
   unset ($affiche_note); ?>
@@ -260,7 +280,7 @@ que des notes et commentaires portés à la connaissance de l'élève
       </td>
   <?php foreach ($eval_valides as $affiche_note) {  ?>
       <td style="text-align: center">
-	<?php if (count($affiche_note['tab_notes'])> 0) echo (round(array_sum($affiche_note['tab_notes'])/count($affiche_note['tab_notes']),2)); ?>
+	<?php if (count($affiche_note['tab_notes'])> 1) echo (round(array_sum($affiche_note['tab_notes'])/count($affiche_note['tab_notes']),2)); ?>
       </td>
   <?php }
   unset ($affiche_note); ?>
@@ -271,7 +291,7 @@ que des notes et commentaires portés à la connaissance de l'élève
       </td>
   <?php foreach ($eval_valides as $affiche_note) {  ?>
       <td style="text-align: center">
-	<?php if (count($affiche_note['tab_notes'])> 0) echo min($affiche_note['tab_notes']); ?>
+	<?php if (count($affiche_note['tab_notes'])> 1) echo min($affiche_note['tab_notes']); ?>
       </td>
   <?php }
   unset ($affiche_note); ?>

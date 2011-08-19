@@ -503,4 +503,104 @@ function statistique($id_evaluation) {
   return $stat;
 }
 
+/**
+ * Vérifie suhosin.post.max_vars, suhosin.post.max_totalname_length
+ * @return boolean TRUE si les valeurs de $_POST sont inférieures à celle de suhosin
+ */
+function verifie_suhosin () {
+  $nb_eleves = count($_SESSION['plugin_notes']['tableau_notes']);
+  $nb_notes = count($_SESSION['plugin_notes']['id_devoir']);
+  $long_maxi_cle = 18;
+  $nb_vars = 2+($nb_eleves*((2*$nb_notes)));
+  
+  $suhosin_actif_1 = verifie_cle_suhosin ('suhosin.post.max_vars',$nb_vars);
+  $suhosin_actif_2 = verifie_cle_suhosin ('suhosin.post.max_totalname_length',$long_maxi_cle);
+  if ($suhosin_actif_1 && $suhosin_actif_2) { 
+    return TRUE;
+  }  
+  return FALSE;
+}
+
+/**
+ * Vérifie si suhosin est activé
+ * 
+ * Si suhosin est activé, vérifie que la valeur de la clé est compatible
+ * 
+ * @param string $suhosin_cle Clé à tester
+ * @param int $taille_post Taille envoyée
+ * @return boolean TRUE si suhosin est activé
+ */
+function verifie_cle_suhosin ($suhosin_cle, $taille_post) {
+  //$tableau_suhosin = charge_tableau_suhosin();
+  //if ($tableau_suhosin) {
+  $val_suhosin=ini_get($suhosin_cle);
+  if($val_suhosin!='') {
+    $cle_request = mb_ereg_replace('post', 'request', $suhosin_cle);
+    $cle_request = mb_ereg_replace('get', 'request', $cle_request);
+    $min_suhosin_cle = min($val_suhosin,ini_get($cle_request));
+    
+    if ($taille_post > $min_suhosin_cle) {
+    // décommenter pour voir les valeurs de suhosin
+    /* *
+      charge_message($suhosin_cle.': '.$tableau_suhosin[$suhosin_cle].' - '.$cle_request.': '.$tableau_suhosin[$cle_request].' - '.$min_suhosin_cle) ;
+      switch ($cle_request) {
+        case 'suhosin.request.max_totalname_length':
+          charge_message('Taille maximale des indices passés en $_POST : '.$taille_post);
+          break;
+        case 'suhosin.request.max_value_length':
+          charge_message('Taille des champs passés en $_POST : '.$taille_post);
+          break;
+        default :
+          charge_message('variables passées en $_POST : '.count($_POST).' - '.$taille_post);
+      }    
+    /* */
+      return FALSE;
+    }
+            
+    return TRUE;
+  }
+  return TRUE;
+}
+
+/**
+ * Renvoie des informations sur suhosin
+ * 
+ * tableau des valeurs ou FALSE si suhosin n'est pas activé
+ * 
+ * $tab_suhosin=array('suhosin.cookie.max_totalname_length','suhosin.get.max_totalname_length','suhosin.post.max_totalname_length','suhosin.post.max_value_length','suhosin.request.max_totalname_length','suhosin.request.max_value_length','suhosin.request.max_vars');
+ * - suhosin.cookie.max_totalname_length : longueur maximale du nom de la variable dans le cookie
+ * - suhosin.get.max_totalname_length : longueur maximale du nom de la variable lorsqu'il est enregistré par l'URL
+ * - suhosin.get.max_value_length : Définit la longueur maximale d'une variable qui est enregistré par l' URL
+ * - suhosin.get.max_vars : Définit le nombre maximum de variables qui peuvent être enregistrés par l' URL
+ * - suhosin.post.max_totalname_length : longueur maximale du nom de la variable lorsqu'il est enregistré par une requête POST
+ * - suhosin.post.max_value_length : Définit la longueur maximale d'une variable qui est enregistré par le biais d'une requête POST
+ * - suhosin.post.max_vars : Définit le nombre maximum de variables qui peuvent être enregistrés via une requête POST
+ * - suhosin.request.max_totalname_length : Définit la longueur maximale des noms de variables pour les variables enregistrées dans le cookie, l' URL ou via une requête POST
+ * - suhosin.request.max_value_length : (caractères) Définit la longueur maximale d'une variable qui est enregistré par le biais du cookie, l'URL ou via une requête POST
+ * - suhosin.request.max_vars : Définit le nombre maximum de variables qui peuvent être enregistrés par le cookie, le URL ou via une requête POST
+ * 
+ * @return string|boolean le tableau ou false
+ * @link http://www.hardened-php.net/suhosin/configuration.html
+ */
+function charge_tableau_suhosin() { 
+  $suhosin_post_max_totalname_length=ini_get('suhosin.post.max_totalname_length');
+  if($suhosin_post_max_totalname_length!='') {
+    $tab_suhosin=array('suhosin.cookie.max_totalname_length' => ini_get('suhosin.cookie.max_totalname_length'), 
+      'suhosin.get.max_totalname_length' => ini_get('suhosin.get.max_totalname_length'), 
+      'suhosin.get.max_value_length' => ini_get('suhosin.post.max_value_length'),    
+      'suhosin.get.max_vars' => ini_get('suhosin.get.max_value_length'),  
+      'suhosin.post.max_totalname_length' => ini_get('suhosin.post.max_totalname_length'), 
+      'suhosin.post.max_value_length' => ini_get('suhosin.post.max_value_length'),  
+      'suhosin.post.max_vars' => ini_get('suhosin.post.max_value_length'),  
+      'suhosin.request.max_totalname_length' => ini_get('suhosin.request.max_totalname_length'), 
+      'suhosin.request.max_value_length' => ini_get('suhosin.request.max_value_length'), 
+      'suhosin.request.max_vars' => ini_get('suhosin.request.max_vars'));
+      return $tab_suhosin;
+  } else {
+    return FALSE;
+  }
+  
+  
+}
+
 ?>

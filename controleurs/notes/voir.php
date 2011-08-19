@@ -31,7 +31,8 @@ include CHEMIN_MODELE.VOIR.'.php';
 
 //==================================
 // Décommenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
-// $affiche_debug=debug_var();
+$_SESSION['tab_suhosin'] = charge_tableau_suhosin();
+$affiche_debug=debug_var();
 
 // On récupère les données passées à la page
 
@@ -153,6 +154,8 @@ $group_actif = recupere_groupe_actif($id_groupe_actif) ;
 $id_periode_active = recupere_periode_active() ;    
   // On récupère les périodes du groupe actif
 $periodes = recupere_periodes($group_actif) ;
+
+$suhosin_bon = verifie_suhosin();
 
 /** 
  * Chargement de la vue de la page
