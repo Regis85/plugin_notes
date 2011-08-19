@@ -24,7 +24,7 @@ include CHEMIN_MODELE."/".VOIR.'.php';
 
 //==================================
 // Décommenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
-$affiche_debug=debug_var();
+// $affiche_debug=debug_var();
 
 // On récupère le groupe actif et on le met dans $_SESSION[PREFIXE]['id_groupe_session']    
 $id_groupe_actif = traite_groupe(); 
