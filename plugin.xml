@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<gepinstall type="plugin">
+    <nom>plugin_notes</nom>
+
+    <creationDate>06 2011</creationDate>
+
+    <auteur>Regis BOUGUIN</auteur>
+
+    <licence>GNU/GPL</licence>
+
+    <auteurCourriel>.</auteurCourriel>
+
+    <auteurSite>.</auteurSite>
+
+    <version>0.2.2</version>
+
+    <versiongepi>1.5.4</versiongepi>
+
+    <description>Saisies de notes avec évaluations multiples</description>
+
+    <installation>
+      <requetes>
+        
+      </requetes>
+    </installation>
+
+    <desinstallation>
+      <requetes>
+        
+      </requetes>
+    </desinstallation>
+
+    <administration>
+
+      <fichier>
+
+          <nomfichier autorisation="A-P-S">index.php</nomfichier>
+
+      </fichier>
+
+        <menu>
+
+	  <item autorisation="A-P-S" titre="Notes" description="Saisir les notes">index.php</item>
+
+        </menu>
+
+    </administration>
+
+</gepinstall>

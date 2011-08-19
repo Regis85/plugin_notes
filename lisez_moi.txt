@@ -1,0 +1,34 @@
+===== Changelog =====
+
+TODO :
+- en Admin pouvoir nettoyer cn_notes_devoirs des évaluations orphelines
+
+version 0.2.3
+- Correction d'un bug sur la gestion des retours depuis la page supprime
+
+version 0.2.2
+- Création automatique du carnet de notes s'il n'existe pas
+- Correction d'un bug si on entrait des ' dans les commentaires
+- Ajout de javascript pour améliorer l'ergonomie
+- Documentation des fonctions (partiel)
+
+version 0.2.1
+- Ajout de javascript pour améliorer l'ergonomie
+- Modification de la fonction d'enregistrement des notes pour l'accélérer
+- Vérifie si les bulletins sont déjà remplis lors de l'enregistrement des notes
+- Interdire la suppression d'une évaluation s'il y a déjà des notes
+- nettoyer cn_notes_devoirs de l'évaluation lors d'une suppression
+- correction calcul des statistiques dans la vue des notes
+
+version 0.2.0
+- Conformité des pages avec règles WAI (accessibilité)
+- Mise à jour des conteneurs lors de l'ajout/modification des notes
+
+version 0.1.0
+- Ajout création d'une période identique à la précédente
+- Possibilité de copier/coller des notes ou des appréciations pour une évaluation
+- Conformité des pages avec règles W3C
+
+version 0.0.1
+- Création des conteneurs
+- Saisie des notes avec possibilité d'afficher plusieurs évaluations

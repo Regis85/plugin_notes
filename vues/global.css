@@ -1,0 +1,154 @@
+
+#container {
+  padding-left: 1em;
+  padding-right: 1em;
+  font-family: serif;
+  font-size: 11pt;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom:  0em;
+  margin-top: 0em;
+  padding-top: 0em;
+  padding-bottom: 0em;
+}
+
+fieldset {
+  padding-top: 0em;
+  padding-bottom: 0em;
+}
+
+.div_tableau {
+  display:table;
+  margin:0 auto; 
+  padding:0em;
+  border-style:none; 
+}
+
+.colonne {
+  text-align: center;
+  display:table-cell;
+  padding:0.5em;
+  border-style:none;
+  padding: 0em;
+  margin: 0em;
+}
+
+.colonne:first-child {
+  min-width: 20%; 
+	font-size:medium;
+	font-weight:normal;
+}
+
+.colonne + .colonne {
+  min-width: 20%; 
+}
+
+.stop {
+  width: 24px;
+  height: 24px;
+  border: none;
+}
+.stop:hover {
+  cursor: pointer;
+}
+
+.font_zero {
+  font-size: 0em;
+}
+.entre_note {
+  background-color: papayawhip;
+  text-align: right;
+}
+.case_note{
+  width: 3em; 
+  text-align: right;
+}
+li .entre_observ {
+  background-color: papayawhip;
+}
+.entre_nom {
+  background-color:honeydew;
+}
+.table_note {
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+.table_note_entete {
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  text-align: center;
+  font-size: 12px;
+  background-color: #fff5b1;
+}
+
+.gras {
+  font-weight: bold;
+}
+
+.aEnregistrer {
+  background:#f26f6f;
+  color: black;
+}
+
+#stats {
+  position: absolute;
+  border: solid 1px black;
+  width: 30%;
+  background:#add8e6;
+  top: 220px; 
+  right: 200px; 
+  text-align:center;
+}
+
+#stats p{
+  background:#006600;
+  text-align:right
+}
+
+#stats table{
+  background:#add8e6;
+}
+
+#stats caption{
+  background:#add8e6;
+}
+
+#stats td{
+  border: solid 1px black;
+  background:#add8e6;
+  text-align:center; 
+}
+
+.repartition {
+  position: absolute;
+  background:#add8e6;
+  border: solid 1px black;
+  width: 15%;
+  top: 220px; 
+  right: 200px; 
+  text-align:center;  
+} 
+
+.repartition p{
+  background:#006600;
+  text-align:right
+}
+
+.repartition th{
+  border: solid 1px black;
+  width: 70%;
+  text-align:center; 
+}
+
+.repartition td{
+  border: solid 1px black;
+  width: 30%;
+  text-align:center; 
+}
+.fond_rouge{
+  background: red;
+}
