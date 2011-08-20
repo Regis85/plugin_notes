@@ -8,7 +8,7 @@
  * @package saisie_notes
  * @subpackage coller
  * @todo Effacer le saut de ligne de fin quand on colle depuis un tableur pour pouvoir tester aussi si on a trop de notes
-  
+ * @todo mettre à jour les conteneurs
 */
 
 /** Les données de l'évaluation prises dans cn_devoirs

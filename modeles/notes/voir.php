@@ -6,7 +6,7 @@
  * @author Régis Bouguin
  * @package saisie_notes
  * @subpackage voir
- *  
+ * @todo mettre à jour les conteneurs (voir coller ligne 259) 
  */
 
 /** Renvoie les évaluations de la période
@@ -18,7 +18,6 @@
  * 
  * @return array  
  * @see peut_noter_groupe()
- * @see 
  */
 function evaluations_disponibles() {  
   // L'enseignant fait parti du groupe ?
@@ -340,7 +339,8 @@ function enregistre_notes($donnees) {
     
   }
   unset ($id_devoir);
-      
+
+  // On récupère les données passées en $_POST dans $tableau_notes
   while (list($key, $val) = each($donnees)) {
     if(mb_ereg("_note_", $key)) {
       $index=mb_strstr ( $key , "_note_" , TRUE );
@@ -407,6 +407,7 @@ function enregistre_notes($donnees) {
     }
   }  
   
+  // on enregistre $tableau_notes dans la base
   foreach ($tableau_notes as $ligne_tableau) {
     foreach ($_SESSION[PREFIXE]["id_devoir"] as $id_eval) {
       if ($ligne_tableau['notes'][$id_eval]['new_note']) {
@@ -419,19 +420,34 @@ function enregistre_notes($donnees) {
                       '".$ligne_tableau['notes'][$id_eval]['statut']."')";
       } else {
 	// on met à jour
-	$sql_table="UPDATE cn_notes_devoirs
+        $sql_table="UPDATE cn_notes_devoirs
                   SET note = '".$ligne_tableau['notes'][$id_eval]['note_devoir']."',
                     statut= '".$ligne_tableau['notes'][$id_eval]['statut']."',
                     comment = '".$ligne_tableau['notes'][$id_eval]['comment_devoir']."'
-                  WHERE login = '".$ligne_tableau['login']."'
+                    WHERE login = '".$ligne_tableau['login']."'
                     AND id_devoir = '".$ligne_tableau['notes'][$id_eval]['id_devoir']."'";
       }
       $query_table = mysql_query($sql_table);
        if (!$query_table) {
-	 charge_message("ERREUR : Erreur lors de l'enregistrement dans la base ! (".$index.")") ;
-	 charge_message("<strong>Vérifiez vos données puis enregistrez à nouveau</strong>") ;
-	 return FALSE;	
+         charge_message("ERREUR : Erreur lors de l'enregistrement dans la base ! (".$index.")") ;
+         charge_message("<strong>Vérifiez vos données puis enregistrez à nouveau</strong>") ;
+         return FALSE;	
        }
+       
+       // on met à jour les moyennes de conteneurs
+        $_current_group["eleves"][$_SESSION[PREFIXE]['periode_num']]["list"][] = $ligne_tableau['login'];
+        $arret='no';
+        $sql_conteneur= "SELECT id_conteneur FROM cn_devoirs WHERE id = '".$ligne_tableau['notes'][$id_eval]['id_devoir']."'";  
+        $query_conteneur = mysql_query($sql_conteneur);  
+        if (!$query_conteneur) {
+          charge_message("ERREUR : Echec de la mise à jour des conteneurs") ;
+          mysql_free_result($query_conteneur);
+          return FALSE;	
+        }
+        $conteneur=mysql_fetch_object($query_conteneur);
+        mysql_free_result($query_conteneur);
+        mise_a_jour_moyennes_conteneurs($_current_group, $_SESSION[PREFIXE]['periode_num'],$_SESSION[PREFIXE]['id_racine'],$conteneur->id_conteneur,$arret);
+  
     }
     unset ($id_eval);
   }
