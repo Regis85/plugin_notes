@@ -264,7 +264,7 @@
     
   </form>
    
- <!--     
+ 
   <form enctype="multipart/form-data" id="form_duplique" action="index.php" method="post">
     <fieldset>
       <legend>Recopie</legend>
@@ -275,7 +275,7 @@
       </p>
     </fieldset> 
   </form>  
- -->
+
     
   <script type="text/javascript">
    //<![CDATA[ 
