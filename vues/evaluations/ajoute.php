@@ -269,8 +269,10 @@
     <fieldset>
       <legend>Recopie</legend>
       <p>
-	<input type="hidden" name="mode" value="duplique" />
-	<input type="hidden" name="action" value="ajoute" />
+	<input type="hidden" name="creation" value=<?php echo DUPLIQUE; ?> />
+	<input type="hidden" name="action" value=<?php echo AJOUTE; ?> />
+    <input type="hidden" name="id_eval" value='<?php echo $affiche_eval["id_eval"]; ?>' />
+    <input type="hidden" name="id_conteneur" value='<?php echo $conteneur->id; ?>' />
 	<input type="submit" value="Créer le même devoir pour d'autres enseignements" />
       </p>
     </fieldset> 

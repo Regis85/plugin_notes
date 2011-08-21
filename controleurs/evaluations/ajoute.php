@@ -17,7 +17,7 @@
 
   //==================================
   // Décommenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
-  // $affiche_debug=debug_var();
+   $affiche_debug=debug_var();
 
   // vérifier que le prof peut noter le groupe
   
@@ -31,6 +31,10 @@
       die ();
     case EVALUATION:
       break;
+    case DUPLIQUE:
+      $_SESSION[PREFIXE]['contexte_action']=DUPLIQUE;
+      header("Location: index.php?id_devoir=".$_POST['id_eval']."&id_conteneur=".$_POST['id_conteneur']."");
+      die ();
     case CUMUL:
       $_SESSION[PREFIXE]['contexte_action']=CUMUL;
       header("Location: index.php");

@@ -84,16 +84,17 @@ define('NOTE', "");
 
 // Affichage des évaluations
 define('CREATION',"creation");
-  define('EVALUATION',"evaluation");
-  define('CUMUL',"cumul");
-  define('MATIERE','matiere');
-  define('IDEM','idem');
+define('EVALUATION',"evaluation");
+define('CUMUL',"cumul");
+define('MATIERE','matiere');
+define('IDEM','idem');
 define('IMPORT',"import_export");
-  define('EXPORTER','exporter');
-  define('IMPORTER','importer');
+define('EXPORTER','exporter');
+define('IMPORTER','importer');
 define('SIGNALER',"signaler");
-  define('AFFECTATION',"affectation");
+define('AFFECTATION',"affectation");
 define('COLLER',"coller");
+define('DUPLIQUE',"duplique");
  
 // Actions de la page de saisie des notes
 define('VOIR_CARNET','Voir le carnet de notes');
