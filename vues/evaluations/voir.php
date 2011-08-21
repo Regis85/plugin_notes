@@ -131,8 +131,8 @@ function affiche_evaluations($sous_eval) { ?>
 <div id="container">
 
   <!-- Autres liens --> 
-<?php if(isset ($_SESSION[PREFIXE]['id_groupe_session']) && isset ($_SESSION[PREFIXE]['periode_num'])) {?>
  <div class='div_tableau'>
+<?php if(isset ($_SESSION[PREFIXE]['id_groupe_session']) && isset ($_SESSION[PREFIXE]['periode_num'])) {?>
     <!-- Import/Export de fichiers --> 
     <div class="colonne ie_gauche">
       <form enctype="multipart/form-data" id= "form2" action="index.php" method="post">
