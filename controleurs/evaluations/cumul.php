@@ -1,9 +1,9 @@
 <?php
 /** Controleur du module evaluations : action cumul 
  * 
- * Création d'évaluations cumuls
+ * CrÃ©ation d'Ã©valuations cumuls
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage cumul
  *

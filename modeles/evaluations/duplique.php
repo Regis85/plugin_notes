@@ -1,10 +1,10 @@
 <?php
 
 /** 
- * modèle du module evaluations : action duplique
+ * modÃ¨le du module evaluations : action duplique
  * 
- * Duplique une évaluation dans un autre groupe
- * @author Régis Bouguin
+ * Duplique une Ã©valuation dans un autre groupe
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage duplique
  */

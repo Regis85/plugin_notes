@@ -1,9 +1,9 @@
 <?php
 /** Controleur du module notes : action voir
  * 
- * Afficher et modifier les notes d'une ou plusieurs évaluations
+ * Afficher et modifier les notes d'une ou plusieurs Ã©valuations
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package saisie_notes
  * @subpackage voir
  * 
@@ -30,11 +30,11 @@
 include CHEMIN_MODELE.VOIR.'.php';
 
 //==================================
-// Décommenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
+// DÃ©commenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
 // $_SESSION['tab_suhosin'] = charge_tableau_suhosin();
 // $affiche_debug=debug_var();
 
-// On récupère les données passées à la page
+// On rÃ©cupÃ¨re les donnÃ©es passÃ©es Ã  la page
 
 
 if (isset ($_POST['action'])) {
@@ -52,7 +52,7 @@ if (isset ($_POST['action'])) {
       die ();
       
     case RETOUR_EVAL:
-      echo "Retour à l'affichage des évaluations";
+      echo "Retour Ã  l'affichage des Ã©valuations";
       $_SESSION[PREFIXE]['contexte_module'] = EVALUATIONS;
       $_SESSION[PREFIXE]['contexte_action'] = VOIR;
       header("Location: index.php");
@@ -63,12 +63,12 @@ if (isset ($_POST['action'])) {
       $donnees = $_POST;
       if (count($donnees)) {
 	if (!enregistre_notes($donnees)) {
-	  charge_message("Les données n'ont pas été sauvegardées") ;
+	  charge_message("Les donnÃ©es n'ont pas Ã©tÃ© sauvegardÃ©es") ;
 	  $_SESSION[PREFIXE]['contexte_action'] = VOIR;
 	  header("Location: index.php");
 	  die ();
 	} else {
-	  charge_message("Les données ont été sauvegardées") ;	
+	  charge_message("Les donnÃ©es ont Ã©tÃ© sauvegardÃ©es") ;	
 	  $_SESSION[PREFIXE]["post_reussi"] = TRUE;
 	}
 	// $_SESSION[PREFIXE]['contexte_action'] = VOIR;
@@ -83,7 +83,7 @@ if (isset ($_POST['action'])) {
   }
   
 } else if (isset ($_POST[CACHER])){
-  // On cache l'évaluation choisie
+  // On cache l'Ã©valuation choisie
   cacher_eval($_POST[CACHER]);
   header("Location: index.php");
   die (); 
@@ -97,14 +97,14 @@ if (isset ($_POST['action'])) {
 
 $id_devoir = isset($_POST["id_devoir"]) ? $_POST["id_devoir"] : (isset($_GET["id_devoir"]) ? $_GET["id_devoir"] : NULL);
 
-// remplir un tableau en $_SESSION[PREFIXE] avec les id de devoirs à afficher pour les retrouver à chaque page
+// remplir un tableau en $_SESSION[PREFIXE] avec les id de devoirs Ã  afficher pour les retrouver Ã  chaque page
 if (!isset ($_SESSION[PREFIXE]["id_devoir"]) || ($id_devoir && !in_array ($id_devoir , $_SESSION[PREFIXE]["id_devoir"]))) {
   $_SESSION[PREFIXE]["id_devoir"][]=$id_devoir;
 }
 
-// on vérifie qu'il y a bien quelque chose à afficher
+// on vÃ©rifie qu'il y a bien quelque chose Ã  afficher
 if (!isset ($_SESSION[PREFIXE]["id_devoir"])){
-    charge_message("Aucun devoir sélectionné"); 
+    charge_message("Aucun devoir sÃ©lectionnÃ©"); 
     $_SESSION[PREFIXE]['contexte_module']=EVALUATIONS;
     $_SESSION[PREFIXE]['contexte_action']=VOIR;
     header("Location: index.php");
@@ -115,26 +115,26 @@ if (!isset ($_SESSION[PREFIXE]["id_devoir"])){
     $_SESSION[PREFIXE]['contexte_action']=VOIR;
     header("Location: index.php");
   } else {
-    // on vérifie que le prof peut évaluer le groupe ?
+    // on vÃ©rifie que le prof peut Ã©valuer le groupe ?
     if (!isset ($_SESSION[PREFIXE]['id_groupe_session']) || !peut_noter_groupe($_SESSION[PREFIXE]['id_groupe_session'])) {     
       charge_message("Vous n'avez pas les droits suffisant sur ce groupe");
       $_SESSION[PREFIXE]['contexte_module']=EVALUATIONS;
       $_SESSION[PREFIXE]['contexte_action']=VOIR;
       header("Location: index.php");
     } else {
-      // Récupérer tous les devoirs disponibles
+      // RÃ©cupÃ©rer tous les devoirs disponibles
       $eval_possibles = evaluations_disponibles();
       
-      // Récupérer les devoirs non choisis  
+      // RÃ©cupÃ©rer les devoirs non choisis  
       $eval_disponibles=eval_non_choisies($eval_possibles);
       
       $tableau_notes = array();
       
-      // Récupérer les devoirs qu'on veut modifier
+      // RÃ©cupÃ©rer les devoirs qu'on veut modifier
       $eval_valides=evaluations_modifiables();
       
       if ($eval_valides) {
-      // Récupérer les éleves du groupe
+      // RÃ©cupÃ©rer les Ã©leves du groupe
       $eleves_groupe = trouveEleves();
 	if ($eleves_groupe) {
 	  $tableau_notes = cherche_notes($eleves_groupe, $eval_valides);
@@ -148,11 +148,11 @@ if (!isset ($_SESSION[PREFIXE]["id_devoir"])){
 }
 
 $id_groupe_actif = $_SESSION[PREFIXE]['id_groupe_session'];
-  // On récupère les données du groupe actif  
+  // On rÃ©cupÃ¨re les donnÃ©es du groupe actif  
 $group_actif = recupere_groupe_actif($id_groupe_actif) ; 
-  // On récupère la période active et on la met dans $_SESSION[PREFIXE]['periode_num']
+  // On rÃ©cupÃ¨re la pÃ©riode active et on la met dans $_SESSION[PREFIXE]['periode_num']
 $id_periode_active = recupere_periode_active() ;    
-  // On récupère les périodes du groupe actif
+  // On rÃ©cupÃ¨re les pÃ©riodes du groupe actif
 $periodes = recupere_periodes($group_actif) ;
 
 $suhosin_bon = verifie_suhosin();
@@ -161,7 +161,7 @@ $suhosin_bon = verifie_suhosin();
  * Chargement de la vue de la page
  *
  */
-// Affichage des évaluations
+// Affichage des Ã©valuations
 include CHEMIN_VUE."/".VOIR.'.php';
   
 

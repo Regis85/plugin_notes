@@ -1,9 +1,9 @@
 <?php
 /** Controleur du module evaluations : action idem
  * 
- * Dupliquer l'organisation d'une période
+ * Dupliquer l'organisation d'une pÃ©riode
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage idem
  * 
@@ -27,34 +27,34 @@
   include CHEMIN_MODELE."/".IDEM.'.php';
 
   
-  // On a annuler, on efface les données en Session puis on retourne à la page de visualisation
+  // On a annuler, on efface les donnÃ©es en Session puis on retourne Ã  la page de visualisation
   if(isset ($_POST['mode']) && $_POST['mode']==ABANDONNER) {
     if (isset ($_SESSION[PREFIXE]['arborescence'])) {
       unset($_SESSION[PREFIXE]['arborescence']);
     }
     $_SESSION[PREFIXE]['contexte_module']=MODULE_DEFAUT;
     $_SESSION[PREFIXE]['contexte_action']=VOIR;
-    charge_message("Recopie de la structure précédente abandonnée");
+    charge_message("Recopie de la structure prÃ©cÃ©dente abandonnÃ©e");
     header("Location: index.php");
     die ();
   }
   
-  // On a valider, on enregistre, on efface les données en Session puis on retourne 
-  // à la page de visualisation
+  // On a valider, on enregistre, on efface les donnÃ©es en Session puis on retourne 
+  // Ã  la page de visualisation
   if(isset ($_POST['mode']) && $_POST['mode']==ENREGISTRER) {
-    // Si on a choisi Enregistrer, on vérifie check_token
+    // Si on a choisi Enregistrer, on vÃ©rifie check_token
     check_token();
-    // Si l'enregistrement ce passe bien, on efface les données en Session puis on retourne à la page de visualisation
+    // Si l'enregistrement ce passe bien, on efface les donnÃ©es en Session puis on retourne Ã  la page de visualisation
     if (enregistre_arbo()) {
       unset($_SESSION[PREFIXE]['arborescence']);
       $_SESSION[PREFIXE]['contexte_module']=MODULE_DEFAUT;
       $_SESSION[PREFIXE]['contexte_action']=VOIR;
       $_SESSION[PREFIXE]['post_reussi']=TRUE;
-      charge_message("Recopie des ".getSettingValue('gepi_denom_boite')."s réussie");
+      charge_message("Recopie des ".getSettingValue('gepi_denom_boite')."s rÃ©ussie");
       header("Location: index.php");
       die ();   
     } else {
-    // Sinon on réaffiche les données
+    // Sinon on rÃ©affiche les donnÃ©es
     charge_message("Echec de la copie de la structure dans la base");
       
       
@@ -62,7 +62,7 @@
     
   }
   
-  // On arrive pour la première fois, on récupère les données puis on affiche la page
+  // On arrive pour la premiÃ¨re fois, on rÃ©cupÃ¨re les donnÃ©es puis on affiche la page
   $arborescence=charge_arborescence();
   if (!$arborescence) {
     if (isset ($_SESSION[PREFIXE]['arborescence'])) {
@@ -78,14 +78,14 @@
 // On passe le tableau en $_SESSION[PREFIXE]
   $_SESSION[PREFIXE]['arborescence']=$arborescence;
   
-// On récupère les données du groupe actif  
+// On rÃ©cupÃ¨re les donnÃ©es du groupe actif  
   $group_actif = recupere_groupe_actif($_SESSION[PREFIXE]['id_groupe_session']) ;
 
-// On récupère les périodes du groupe actif
+// On rÃ©cupÃ¨re les pÃ©riodes du groupe actif
   $periodes = recupere_periodes($group_actif) ;
     
   //==================================
-  // Décommenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
+  // DÃ©commenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
   // $affiche_debug=debug_var();
     
 /** 

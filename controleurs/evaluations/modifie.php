@@ -4,7 +4,7 @@
  * 
  * Modifier le trimestre ou le groupe actif
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage modifier
  * @see regle_trimestre()
@@ -45,7 +45,7 @@ if (!empty($_POST[SIGNALER])) {
 }
 
 //==================================
-// Décommenter les 2 lignes ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
+// DÃ©commenter les 2 lignes ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
 // $affiche_debug=debug_var();
 // die;
 

@@ -1,17 +1,17 @@
 <?php
-/** Modèle du module evaluations : action voir 
+/** ModÃ¨le du module evaluations : action voir 
  * 
- * Affichage de l'arborescence des boites et des évaluations
+ * Affichage de l'arborescence des boites et des Ã©valuations
  * 
  * @package arborescence
  * @subpackage voir
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * 
  */
 
 /** Renvoie l'Id du groupe actif
  * 
- * Récupère l'Id du groupe s'il est passé en $_POST["id_groupe"] ou $_GET["id_groupe"]
+ * RÃ©cupÃ¨re l'Id du groupe s'il est passÃ© en $_POST["id_groupe"] ou $_GET["id_groupe"]
  * et le met en $_SESSION[PREFIXE]['id_groupe_session']
  * 
  * Vide le tableau de notes si on change de groupe avec efface_notes_session()
@@ -42,7 +42,7 @@ function traite_groupe(){
   }
     
   if (is_numeric($id_groupe) && $id_groupe > 0) {
-    // on vérifie que le prof a accès au groupe
+    // on vÃ©rifie que le prof a accÃ¨s au groupe
     $sql="SELECT 1=1 FROM j_groupes_professeurs WHERE id_groupe='$id_groupe' AND login='".$_SESSION['login']."';";
     $test_prof_groupe=mysql_query($sql);
     if(mysql_num_rows($test_prof_groupe)==0) {
@@ -59,14 +59,14 @@ function traite_groupe(){
 
 /** Renvoie les enseignements d'un groupe
  * 
- * Récupère les informations des groupes d'un enseignant à partir de $_SESSION['login']
+ * RÃ©cupÃ¨re les informations des groupes d'un enseignant Ã  partir de $_SESSION['login']
  * en utilisant get_groups_for_prof() et met en forme la description
  *
  * @return array Le tableau issu de get_groups_for_prof()
  * @see get_groups_for_prof()
  */ 
 function recupere_tous_groupes() {
-  $groupes = get_groups_for_prof($_SESSION['login'],"classe puis matière") ;
+  $groupes = get_groups_for_prof($_SESSION['login'],"classe puis matiÃ¨re") ;
   foreach ($groupes as &$matiere) {
     $matiere["description"] = htmlentities($matiere["description"],ENT_COMPAT) ;
   }
@@ -76,15 +76,15 @@ function recupere_tous_groupes() {
 /** Renvoie l'arborescence du groupe
  * 
  * Construit l'arborescence du carnet de notes pour le groupe en $_SESSION[PREFIXE]['id_groupe_session'] 
- * et la période $_SESSION[PREFIXE]['periode_num']
+ * et la pÃ©riode $_SESSION[PREFIXE]['periode_num']
  * 
  * Charge l'Id du carnet de notes dans $_SESSION[PREFIXE]['id_racine']
  * 
- * Utilise les fonctions sous_modules() pour récupérer les boites incluses
- * et eval_conteneur() pour récupérer les évaluations
+ * Utilise les fonctions sous_modules() pour rÃ©cupÃ©rer les boites incluses
+ * et eval_conteneur() pour rÃ©cupÃ©rer les Ã©valuations
  *
  * @param recupere_periodes
- * @return array Le tableau organisé des boites et évaluations 
+ * @return array Le tableau organisÃ© des boites et Ã©valuations 
  * @see recupere_periodes()
  * @see sous_modules()
  * @see eval_conteneur()
@@ -93,7 +93,7 @@ function eval_dispo($periodes) {
   
   $conteneur=array();
   
-  // On récupère le conteneur du trimestre
+  // On rÃ©cupÃ¨re le conteneur du trimestre
   $sql="SELECT co.id , co.nom_court , co.nom_complet 
 	           FROM cn_cahier_notes cn, cn_conteneurs co
                    WHERE cn.periode='".$_SESSION[PREFIXE]['periode_num']."' 
@@ -106,7 +106,7 @@ function eval_dispo($periodes) {
   /* */ 
   if(mysql_num_rows($res_test)!=0){
   /* *
-   * Si la période est close ne récupérer que le conteneur du trimestre
+   * Si la pÃ©riode est close ne rÃ©cupÃ©rer que le conteneur du trimestre
   /* */
       $nom_complet = htmlentities(mysql_result($res_test, 0, 'co.nom_complet'),ENT_COMPAT);
       $nom_court= htmlentities(mysql_result($res_test, 0, 'co.nom_court'),ENT_COMPAT);
@@ -118,7 +118,7 @@ function eval_dispo($periodes) {
 			 'evaluation'=>array(),
 			 'close'=>TRUE);
 
-  /* sinon récupérer les sous-conteneurs et les évaluations */
+  /* sinon rÃ©cupÃ©rer les sous-conteneurs et les Ã©valuations */
     } else {
       $id = mysql_result($res_test, 0, 'co.id');
       $nom_complet = htmlentities(mysql_result($res_test, 0, 'co.nom_complet'),ENT_COMPAT);
@@ -137,13 +137,13 @@ function eval_dispo($periodes) {
   return $conteneur;
 }
 
-/** Récupère les sous-conteneurs d'un conteneur
+/** RÃ©cupÃ¨re les sous-conteneurs d'un conteneur
  * 
- * Renvoie un tableau organisé pour représenté l'arborescence du conteneur 
- * en s'appelant récursivement puis en appelant eval_conteneur()
+ * Renvoie un tableau organisÃ© pour reprÃ©sentÃ© l'arborescence du conteneur 
+ * en s'appelant rÃ©cursivement puis en appelant eval_conteneur()
  *
  * @param int Id du conteneur parent
- * @return array Le tableau représentant le conteneur
+ * @return array Le tableau reprÃ©sentant le conteneur
  * @see eval_conteneur()
  */
 function sous_modules($id) {
@@ -185,12 +185,12 @@ function sous_modules($id) {
   
 }
 
-/** Renvoie les évaluations d'un conteneur
+/** Renvoie les Ã©valuations d'un conteneur
  *
  * Renvoie tous les champs de la table cn_devoirs dans un tableau pour un conteneur
  * 
  * @param int Id du conteneur
- * @return array Les données de l'évaluation 
+ * @return array Les donnÃ©es de l'Ã©valuation 
  */
 function eval_conteneur($id) {
   $evaluations=array(); 
@@ -224,7 +224,7 @@ function eval_conteneur($id) {
      } else {
        $nb_notes = 0 ;
      }
-     // Nombre d'élèves
+     // Nombre d'Ã©lÃ¨ves
      if (0 == $nb_eleves) {
        $sql_eleves = "SELECT DISTINCT el.*
 	       FROM  j_eleves_groupes el , cn_cahier_notes no
@@ -248,7 +248,7 @@ function eval_conteneur($id) {
   return $evaluations;
 }
 
-/** Construit les liens vers les bulletins et les évaluations de l'année
+/** Construit les liens vers les bulletins et les Ã©valuations de l'annÃ©e
  *
  * @return array un tableau titre text, adresse lien, autre text
  * @see moyenne_existe
@@ -258,7 +258,7 @@ function eval_conteneur($id) {
 function liens_externes(){
   $liens=array();
   if (isset ($_SESSION[PREFIXE]['id_groupe_session'])){
-    $liens[]=array("titre" => "Voir toutes les évaluations de l'année",
+    $liens[]=array("titre" => "Voir toutes les Ã©valuations de l'annÃ©e",
 	         "adresse" => CHEMIN_RACINE.TOUTES_LES_NOTES."?id_groupe=".$_SESSION[PREFIXE]['id_groupe_session']);
     if (isset ($_SESSION[PREFIXE]['periode_num']) && ouverte($_SESSION[PREFIXE]['periode_num'])){
       $parametres="id_groupe=".$_SESSION[PREFIXE]['id_groupe_session']."&amp;periode_cn=".$_SESSION[PREFIXE]['periode_num'];
@@ -269,7 +269,7 @@ function liens_externes(){
       $liens[]=array("titre" => "Saisie des moyennes trimestrielles",
  	             "adresse" => CHEMIN_RACINE.SAISIE_MOYENNES."?".$parametres,
 	             "autre" => $moyenne_vide);
-      $liens[]=array("titre" => "Saisie des appréciations trimestrielles",
+      $liens[]=array("titre" => "Saisie des apprÃ©ciations trimestrielles",
  	             "adresse" => CHEMIN_RACINE.SAISIE_APPRECIATION."?".$parametres,
 	             "autre" => $appreciation_vide);
     }
@@ -277,13 +277,13 @@ function liens_externes(){
   return $liens;
 }
 
-/** Vérifie si une moyenne existe pour une période
+/** VÃ©rifie si une moyenne existe pour une pÃ©riode
  * 
- * Vérifie dans matieres_notes si une moyenne existe pour une période 
+ * VÃ©rifie dans matieres_notes si une moyenne existe pour une pÃ©riode 
  * et le groupe contenu dans $_SESSION[PREFIXE]['id_groupe_session']
  *
- * @param int Le numéro de la période
- * @return bool TRUE si la période existe, FALSE sinon
+ * @param int Le numÃ©ro de la pÃ©riode
+ * @return bool TRUE si la pÃ©riode existe, FALSE sinon
  */
 function moyenne_existe($num_periode){
   if (isset ($_SESSION[PREFIXE]['id_groupe_session'])){
@@ -300,13 +300,13 @@ function moyenne_existe($num_periode){
   return FALSE;
 }
 
-/** Vérifie si une appréciation existe pour une période
+/** VÃ©rifie si une apprÃ©ciation existe pour une pÃ©riode
  * 
- * Vérifie dans matieres_appreciations si une appréciation existe pour une période 
+ * VÃ©rifie dans matieres_appreciations si une apprÃ©ciation existe pour une pÃ©riode 
  * et le groupe contenu dans $_SESSION[PREFIXE]['id_groupe_session']
  *
  * @param int $num_periode
- * @return bool TRUE si la période existe, FALSE sinon
+ * @return bool TRUE si la pÃ©riode existe, FALSE sinon
  */
 function appreciation_existe($num_periode){
   if (isset ($_SESSION[PREFIXE]['id_groupe_session'])){
@@ -323,13 +323,13 @@ function appreciation_existe($num_periode){
   return FALSE;
 }
 
-/** Vérifie si une période est ouverte
+/** VÃ©rifie si une pÃ©riode est ouverte
  * 
- * Vérifie dans la base si une période est ouverte
+ * VÃ©rifie dans la base si une pÃ©riode est ouverte
  * pour le groupe contenu dans $_SESSION[PREFIXE]['id_groupe_session']
  *
  * @param int $num_periode
- * @return bool TRUE si la période existe, FALSE sinon
+ * @return bool TRUE si la pÃ©riode existe, FALSE sinon
  */
 function ouverte($num_periode){
   $id_groupe = $_SESSION[PREFIXE]['id_groupe_session']; //pas bon

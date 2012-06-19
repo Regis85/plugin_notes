@@ -3,14 +3,14 @@
  * 
  * Gestion de l'arborescence du carnet de notes
  * 
- * Saisie des notes et des commentaires de 1 ou plusieurs évaluations
+ * Saisie des notes et des commentaires de 1 ou plusieurs Ã©valuations
  *  
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @version 0.2.2
  * @package global
  * 
- * @todo Vérifier les pages pour remplacer htmlentities par traitement_magic_quotes()
- * @todo Faire un réadressage d'adresse dans tous les répertoires
+ * @todo VÃ©rifier les pages pour remplacer htmlentities par traitement_magic_quotes()
+ * @todo Faire un rÃ©adressage d'adresse dans tous les rÃ©pertoires
  * 
  */
  
@@ -37,12 +37,12 @@ if ($resultat_session == 'c') {
     die();
 }
 /** 
- * Vérification des droits
+ * VÃ©rification des droits
  *
  */
 include("../plugins.class.php");
 
-// Il faut adapter cette ligne au statut des utilisateurs qui auront accès à cette page, par défaut des utilisateurs professionnels
+// Il faut adapter cette ligne au statut des utilisateurs qui auront accÃ¨s Ã  cette page, par dÃ©faut des utilisateurs professionnels
 $utilisateur = UtilisateurProfessionnelPeer::retrieveByPk($_SESSION['login']);
 $user_auth = new gepiPlugIn("plugin_notes");
 $user_auth->verifDroits();
@@ -53,7 +53,7 @@ $user_auth->verifDroits();
 ****************************************************************/
 
 if (getSettingValue("active_carnets_notes")!='y') {
-    die("Le module n'est pas activé.");
+    die("Le module n'est pas activÃ©.");
 } else {
 
 /** 
@@ -62,30 +62,30 @@ if (getSettingValue("active_carnets_notes")!='y') {
  */
   include 'modeles/init.php';
 
-  // Début de la tamporisation de sortie
+  // DÃ©but de la tamporisation de sortie
   ob_start();
   
-// TODO : gérer l'accès en admin et scolarité -> ils se connectent pourquoi ?
+// TODO : gÃ©rer l'accÃ¨s en admin et scolaritÃ© -> ils se connectent pourquoi ?
   
   /* */
 
   $module = dirname(__FILE__).'/controleurs/'.$_SESSION[PREFIXE]['contexte_module'].'/';
   
-  // Si l'action existe, on l'exécute
+  // Si l'action existe, on l'exÃ©cute
   if (is_file($module.$action.'.php')) {
     /** 
      * Chargement de la page
      * 
-     *  @donnees $_SESSION[PREFIXE]['contexte_module'] le module utilisé (arborescence, saisie de notes...)
+     *  @donnees $_SESSION[PREFIXE]['contexte_module'] le module utilisÃ© (arborescence, saisie de notes...)
      * 
-     *  @donnees $_SESSION[PREFIXE]['contexte_action'] l'action à effectuer (voir, supprimer ...)
+     *  @donnees $_SESSION[PREFIXE]['contexte_action'] l'action Ã  effectuer (voir, supprimer ...)
      */
     include $module.$action.'.php';
 
   } else {
 
     /** 
-     * Par défaut, chargement de la page de vision
+     * Par dÃ©faut, chargement de la page de vision
      *
      */
     include $module.VOIR.'.php';
@@ -100,25 +100,25 @@ if (getSettingValue("active_carnets_notes")!='y') {
   // Fin de la tamporisation de sortie
   $contenu = ob_get_clean();
 
-  // Début du code HTML
+  // DÃ©but du code HTML
   
 /** 
- * Déclaration du DOCTYPE de la page
+ * DÃ©claration du DOCTYPE de la page
  *
  */
   include CHEMIN_VUE_GLOBALE.'haut.php';
 /** 
- * Création du Header de la page
+ * CrÃ©ation du Header de la page
  *
  */
   include CHEMIN_GABARITS.'header_template.php';
 /** 
- * Affichage des style spécifiques
+ * Affichage des style spÃ©cifiques
  *
  */  
   include CHEMIN_VUE_GLOBALE.'fin_header.php';
   
-  // On affiche les messages éventuels
+  // On affiche les messages Ã©ventuels
   if (isset ($_SESSION[PREFIXE]['tbs_msg'])) {
     $tbs_msg=$_SESSION[PREFIXE]['tbs_msg'];
     unset ($_SESSION[PREFIXE]['tbs_msg']);

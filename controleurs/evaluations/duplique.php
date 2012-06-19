@@ -3,8 +3,8 @@
 /** 
  * Controleur du module evaluations : action duplique
  * 
- * Duplique une évaluation dans un autre groupe
- * @author Régis Bouguin
+ * Duplique une Ã©valuation dans un autre groupe
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage duplique
  */
@@ -16,7 +16,7 @@
   include CHEMIN_MODELE."/".DUPLIQUE.'.php';
 
   //==================================
-  // Décommenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
+  // DÃ©commenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
    $affiche_debug=debug_var();
 
 $id_conteneur = isset ($_GET['id_conteneur']) ? $_GET['id_conteneur'] : NULL;

@@ -1,17 +1,17 @@
 <?php
 /** Modele du module evaluations : action matiere
  * 
- * Création de sous-conteneurs
+ * CrÃ©ation de sous-conteneurs
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage matiere
  * 
  */
 
-/** Enregistre les données du conteneur dans la base
+/** Enregistre les donnÃ©es du conteneur dans la base
  * 
- * @return bool TRUE si l'enregistrement s'est bien passé, FALSE + un message sinon
+ * @return bool TRUE si l'enregistrement s'est bien passÃ©, FALSE + un message sinon
  * @see traitement_magic_quotes()
  * @see getSettingValue()
  * @see charge_message()
@@ -21,7 +21,7 @@ function enregisteConteneur() {
   // On vide les messages
   unset ($_SESSION[PREFIXE]['tbs_msg']);
   
-  // On récupère en session les données
+  // On rÃ©cupÃ¨re en session les donnÃ©es
   $donnees_passees = array();
   $donnees_passees['nomCourt']  = !empty ($_POST['nom']) ? traitement_magic_quotes($_POST['nom']) : (!empty ($_SESSION[PREFIXE]['nomCourt']) ? $_SESSION[PREFIXE]['nomCourt'] : getSettingValue('gepi_denom_boite'));
   $donnees_passees['nomComplet'] = !empty ($_POST['nomComplet']) ? $_POST['nomComplet'] : (!empty ($_SESSION[PREFIXE]['nomComplet']) ? $_SESSION[PREFIXE]['nomComplet'] : "");
@@ -58,7 +58,7 @@ function enregisteConteneur() {
   if(isset ($_POST['id_conteneur'])) {
     $donnees_passees['id_conteneur'] = $_POST['id_conteneur'];    
     // Si on modifie le parent, il faut remplir 
-    // $_POST['emplacement'], $donnees_passees['emplacement'] à 0
+    // $_POST['emplacement'], $donnees_passees['emplacement'] Ã  0
     if ($_POST['id_conteneur'] == $donnees_passees['id_racine']) {
       $donnees_passees['emplacement'] = "0";
       $_POST['emplacement'] = "racine";
@@ -95,7 +95,7 @@ function enregisteConteneur() {
 	          `parent` = '".$donnees_passees['emplacement']."'
 	      WHERE id = '".$donnees_passees['id_conteneur']."'";
     } else {
-      // on n'a pas d'id, on est en train de créer un conteneur
+      // on n'a pas d'id, on est en train de crÃ©er un conteneur
       $sql="INSERT INTO `cn_conteneurs` 
 	      (id_racine,
 	          nom_court,
@@ -124,17 +124,17 @@ function enregisteConteneur() {
     if (mysql_query($sql)) {
       return TRUE;
     } else {
-      charge_message("Échec lors de l'enregistrement dans la base<br />".$sql);
+      charge_message("Ã‰chec lors de l'enregistrement dans la base<br />".$sql);
       return FALSE;
     }
     
   }
   
-  charge_message("Des champs obligatoires n'ont pas été renseignés");
+  charge_message("Des champs obligatoires n'ont pas Ã©tÃ© renseignÃ©s");
   return FALSE;
 }
 
-/** Renvoie dans un tableau, les données de la base pour un conteneur à partir de son Id
+/** Renvoie dans un tableau, les donnÃ©es de la base pour un conteneur Ã  partir de son Id
  * 
  * id_conteneur = cn_conteneurs.id,
  * id_racine = cn_conteneurs.id_racine,
@@ -150,13 +150,13 @@ function enregisteConteneur() {
  * emplacement'] = cn_conteneurs.parent
  * 
  * @param int $id_conteneur L'id du conteneur
- * @return tableau mixed Les données du conteneur enregistrées dans la base
+ * @return tableau mixed Les donnÃ©es du conteneur enregistrÃ©es dans la base
  * 
  */
 function recharge_conteneur($id_conteneur){
   
   $conteneur = array ();
-  // On récupère les données du conteneur
+  // On rÃ©cupÃ¨re les donnÃ©es du conteneur
   $sql="SELECT * FROM `cn_conteneurs`
           WHERE `id` ='".$id_conteneur."' ";
   $result = mysql_query($sql);
@@ -176,7 +176,7 @@ function recharge_conteneur($id_conteneur){
     $conteneur['emplacement'] = $donnee_recu['parent']; 
   } else {
     mysql_free_result($result); 
-    charge_message("Échec lors de la récupération dans la base");
+    charge_message("Ã‰chec lors de la rÃ©cupÃ©ration dans la base");
     return FALSE;
   }
   
@@ -184,9 +184,9 @@ function recharge_conteneur($id_conteneur){
   return $conteneur;
 }
 
-/** Renvoie dans un tableau, les données pour un nouveau conteneur
+/** Renvoie dans un tableau, les donnÃ©es pour un nouveau conteneur
  * 
- * @return tableau  mixed Des données par défaut pour un nouveau conteneur
+ * @return tableau  mixed Des donnÃ©es par dÃ©faut pour un nouveau conteneur
  * 
  */
 function recharge_conteneur_defaut(){

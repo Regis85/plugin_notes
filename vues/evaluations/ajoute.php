@@ -1,13 +1,13 @@
 <?php   
 /** Vue du module evaluations : action ajoute
  * 
- * Création d'une évaluation
+ * CrÃ©ation d'une Ã©valuation
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage ajoute
- * @todo Gérer Créer le même devoir pour d'autres enseignements
- * @todo Créer un bouton pour ajouter Autocomplete et pouvoir choisir tout, numérique rien
+ * @todo GÃ©rer CrÃ©er le mÃªme devoir pour d'autres enseignements
+ * @todo CrÃ©er un bouton pour ajouter Autocomplete et pouvoir choisir tout, numÃ©rique rien
  * 
  */
  
@@ -16,7 +16,7 @@
 <div id="container">
   <a name='contenu'></a>
 
-  <h2>Ajouter/modifier une évaluation</h2>
+  <h2>Ajouter/modifier une Ã©valuation</h2>
 
   <h3 class="center">
     <?php
@@ -29,11 +29,11 @@
   </h3>
 
 
-  <a id="contenu" class="invisible">Début de la page</a>
+  <a id="contenu" class="invisible">DÃ©but de la page</a>
 
   <form enctype="multipart/form-data" action="index.php" id="form_nom" method="post">
     <fieldset>
-      <legend>Général</legend>
+      <legend>GÃ©nÃ©ral</legend>
       
       <input type="hidden" name="action" value="ajoute" />
       <input type="hidden" name="creation" value="evaluation" />
@@ -58,7 +58,7 @@
       <br />
       <label for="emplacement">* Emplacement :</label>
       <select name="emplacement" id="emplacement">
-	<!-- <option value=''>Sélectionnez un emplacement</option> -->
+	<!-- <option value=''>SÃ©lectionnez un emplacement</option> -->
       <?php
       foreach ($sous_matieres as $conteneur) {
       ?>
@@ -85,14 +85,14 @@
 		  style ="vertical-align: middle; width: 80%;"
 		  ><?php echo $affiche_eval['evalDescription']; ?></textarea>
       <p>
-	* Coefficient de l'évaluation
+	* Coefficient de l'Ã©valuation
 	<img src="<?php echo CHEMIN_IMAGES; ?>icons/ico_question_petit.png" 
 	     alt="Pas d'image en <?php echo CHEMIN_IMAGES; ?>icons/ico_question_petit.png" 
-	     title="Précisions" 
+	     title="PrÃ©cisions" 
 	     onclick ="cache_montre_aide_coef();"/>
 	<span id="coef_long1">
 	  <br />
-	  <label for="coefEval1">Valeur de la pondération dans le calcul de la moyenne :</label>
+	  <label for="coefEval1">Valeur de la pondÃ©ration dans le calcul de la moyenne :</label>
 	</span>
 	<input type="text" 
 	       name="coefEval" 
@@ -101,7 +101,7 @@
 	       onkeydown="clavier_3(this.id,event,0,10,0.5);" />
 	<span id="coef_long2">
 	<br />
-	<em>(si 0, la note de l'évaluation n'intervient pas dans le calcul de la moyenne)</em>
+	<em>(si 0, la note de l'Ã©valuation n'intervient pas dans le calcul de la moyenne)</em>
 	</span>
       </p>
       
@@ -111,7 +111,7 @@
       </p>
       
       <p class="center rouge">
-	Les champs précédés d'un * sont obligatoires
+	Les champs prÃ©cÃ©dÃ©s d'un * sont obligatoires
       </p>
 
     </fieldset>
@@ -119,7 +119,7 @@
     <fieldset>
       <legend>Dates</legend>
       <p>
-	<label for="display_date">* Date de l'évaluation (format jj/mm/aaaa) :</label>
+	<label for="display_date">* Date de l'Ã©valuation (format jj/mm/aaaa) :</label>
 	<input type='text'
 	       name = 'display_date'
 	       id='display_date'
@@ -133,17 +133,17 @@
 	</a>
 	<img src="<?php echo CHEMIN_IMAGES; ?>icons/ico_question_petit.png" 
 	     alt="Bouton d'affichage" 
-	     title="Précisions" 
+	     title="PrÃ©cisions" 
 	     onclick ="cache_montre_aide_display();"/>
 	<br />
 	<em id="aide_display_date">
-	C'est cette date qui est prise en compte pour l'édition 
-	des relevés de notes à différentes périodes de l'année.
+	C'est cette date qui est prise en compte pour l'Ã©dition 
+	des relevÃ©s de notes Ã  diffÃ©rentes pÃ©riodes de l'annÃ©e.
 	</em>
       </p>
       <a name="calend"></a>
       <p>
-	<label for="date_ele_resp">* Date de visibilité de l'évaluation pour les élèves et responsables (format jj/mm/aaaa) : </label>
+	<label for="date_ele_resp">* Date de visibilitÃ© de l'Ã©valuation pour les Ã©lÃ¨ves et responsables (format jj/mm/aaaa) : </label>
 	<input type='text' 
 	       name='date_ele_resp' 
 	       id='date_ele_resp' 
@@ -156,12 +156,12 @@
 	</a>
 	<img src="<?php echo CHEMIN_IMAGES; ?>icons/ico_question_petit.png" 
 	     alt="bouton d'affichage" 
-	     title="Précisions" 
+	     title="PrÃ©cisions" 
 	     onclick ="cache_montre_aide_parents();"/>
 	<br />
 	<em id="aide_visible_parent">
 	  Remarque : Cette date permet de ne rendre la note visible qu'une fois que le devoir 
-	  est corrigé en classe.
+	  est corrigÃ© en classe.
 	</em>
       </p>
       
@@ -188,15 +188,15 @@
 	<label for="noteSur20">Ramener la note sur 20 lors du calcul de la moyenne :</label>
 	<img src="<?php echo CHEMIN_IMAGES; ?>icons/ico_question_petit.png" 
 	     alt="bouton d'affichage" 
-	     title="Précisions" 
+	     title="PrÃ©cisions" 
 	     onclick ="cache_montre_aide_calcul();"/>
 	<br />
 	<em id="aide_calcul_note">
 	  Exemple avec 3 notes : 18/20 ; 4/10 ; 1/5
 	  <br />
-	  Case cochée : moyenne = 18/20 + 8/20 + 4/20 = 30/60 = 10/20
+	  Case cochÃ©e : moyenne = 18/20 + 8/20 + 4/20 = 30/60 = 10/20
 	  <br />
-	  Case cochée : moyenne = (18 + 4 + 1) / (20 + 10 + 5) = 23/35  &asymp; 13,1/20
+	  Case cochÃ©e : moyenne = (18 + 4 + 1) / (20 + 10 + 5) = 23/35  &asymp; 13,1/20
 	</em>
       </p>
       
@@ -206,18 +206,18 @@
 	  <option value='O' <?php if ($affiche_eval['moyenne']=='O') {?>
 	    selected="selected"
 	  <?php } ?>>
-	    La note de l'évaluation entre dans le calcul de la moyenne.
+	    La note de l'Ã©valuation entre dans le calcul de la moyenne.
 	  </option>
 	  <option value='B' <?php if ($affiche_eval['moyenne']=='B') {?>
 	    selected="selected"
 	  <?php } ?>>
-	    Seules les notes de l'évaluation supérieures à 10 entrent dans le calcul 
+	    Seules les notes de l'Ã©valuation supÃ©rieures Ã  10 entrent dans le calcul 
 	    de la moyenne.
 	  </option>
 	  <option value='N' <?php if ($affiche_eval['moyenne']=='N') {?>
 	    selected="selected"
 	  <?php } ?>>
-	    La note de l'évaluation n'entre dans le calcul de la moyenne que si elle améliore 
+	    La note de l'Ã©valuation n'entre dans le calcul de la moyenne que si elle amÃ©liore 
 	    la moyenne.
 	  </option>
 	</select>
@@ -226,14 +226,14 @@
     </fieldset>
     
     <fieldset>
-      <legend>Affichage sur les relevés</legend>
+      <legend>Affichage sur les relevÃ©s</legend>
       <p>
 	<input type="checkbox" 
 	       name="noteSurReleve" 
 	       id="noteSurReleve" 
 	       value="1"
 	       <?php if ($affiche_eval['noteSurReleve']) echo ' checked="checked"'; ?> />
-	<label for="noteSurReleve">Faire apparaître cette évaluation sur le relevé de notes de l'élève</label>
+	<label for="noteSurReleve">Faire apparaÃ®tre cette Ã©valuation sur le relevÃ© de notes de l'Ã©lÃ¨ve</label>
 	
 	<br />
 	<input type="checkbox" 
@@ -241,10 +241,10 @@
 	       id="appSurReleve" 
 	       value="1"
 	       <?php if ($affiche_eval['appSurReleve']) echo ' checked="checked"'; ?> />
-	<label for="appSurReleve">L'appréciation de l'évaluation est affichable sur le relevé de notes de l'élève</label>
+	<label for="appSurReleve">L'apprÃ©ciation de l'Ã©valuation est affichable sur le relevÃ© de notes de l'Ã©lÃ¨ve</label>
 	<br />
 	<em>
-	  (si l'option précédente a été validée)
+	  (si l'option prÃ©cÃ©dente a Ã©tÃ© validÃ©e)
 	</em>
 	
       </p>
@@ -273,7 +273,7 @@
 	<input type="hidden" name="action" value=<?php echo AJOUTE; ?> />
     <input type="hidden" name="id_eval" value='<?php echo $affiche_eval["id_eval"]; ?>' />
     <input type="hidden" name="id_conteneur" value='<?php echo $conteneur->id; ?>' />
-	<input type="submit" value="Créer le même devoir pour d'autres enseignements" />
+	<input type="submit" value="CrÃ©er le mÃªme devoir pour d'autres enseignements" />
       </p>
     </fieldset> 
   </form>  

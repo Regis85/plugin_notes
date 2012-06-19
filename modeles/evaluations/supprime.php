@@ -1,17 +1,17 @@
 <?php
-/** Modele du module évaluations : action supprimer
+/** Modele du module Ã©valuations : action supprimer
  * 
- * Supprimer un conteneur ou une évaluation
+ * Supprimer un conteneur ou une Ã©valuation
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage supprime
  * 
  */
 
-/** Détermine si on peut supprimer un conteneur
+/** DÃ©termine si on peut supprimer un conteneur
  * 
- * Vérifie que le conteneur est vide et que l'utilisateur est bien enseignant du groupe avec
+ * VÃ©rifie que le conteneur est vide et que l'utilisateur est bien enseignant du groupe avec
  * les fonctions est_enseignant() et est_dans_groupe()
  * 
  * @param int L'id du conteneur
@@ -27,7 +27,7 @@ function peut_supprimer_conteneur($conteneur) {
   if(mysql_num_rows($test_sous_conteneur)!=0) {
     return FALSE ;
   }
-  // Il n'y a pas d'évaluation ?
+  // Il n'y a pas d'Ã©valuation ?
   $sql = "SELECT 1=1 FROM `cn_devoirs` WHERE `id_conteneur` = '".$conteneur."'";
   $test_evaluation=mysql_query($sql);
   if(mysql_num_rows($test_evaluation)!=0) {
@@ -46,13 +46,13 @@ function peut_supprimer_conteneur($conteneur) {
     
 }
 
-/** Récupère les données d'un conteneur
+/** RÃ©cupÃ¨re les donnÃ©es d'un conteneur
  *  
- * Récupère les données d'un conteneur dans cn_conteneurs + 
+ * RÃ©cupÃ¨re les donnÃ©es d'un conteneur dans cn_conteneurs + 
  * l'appelation choisie pour les boites
  * 
  * @param int L'id du conteneur
- * @return object $retour Les données enregistrées dans les tables, FALSE sinon
+ * @return object $retour Les donnÃ©es enregistrÃ©es dans les tables, FALSE sinon
  * @see getSettingValue()
  */
 function charge_module($conteneur) {
@@ -65,7 +65,7 @@ function charge_module($conteneur) {
   }
   
   if(mysql_num_rows($result)>1) {
-    echo 'on ne devrait jamais avoir 2 conteneurs avec le même ID';
+    echo 'on ne devrait jamais avoir 2 conteneurs avec le mÃªme ID';
     die ();
   }
   
@@ -78,10 +78,10 @@ function charge_module($conteneur) {
   
 }
 
-/** Supprimer un conteneur à partir de son Id
+/** Supprimer un conteneur Ã  partir de son Id
  * 
  * @param int L'id du conteneur
- * @return bool TRUE si le conteneur a été supprimé de la table, FALSE sinon
+ * @return bool TRUE si le conteneur a Ã©tÃ© supprimÃ© de la table, FALSE sinon
  * 
  */
 function supprime_conteneur($conteneur) {
@@ -95,7 +95,7 @@ function supprime_conteneur($conteneur) {
   return FALSE ;
 }
 
-/** Vérifie qu'un utilisateur est enseignant
+/** VÃ©rifie qu'un utilisateur est enseignant
  * 
  * @param int Le login de l'utilisateur
  * @return bool TRUE si l'utilisateur est enseignant, FALSE sinon
@@ -113,7 +113,7 @@ function est_enseignant($enseignant) {
   return TRUE;
 }
  
-/** Détermine si un enseignant fait parti du groupe
+/** DÃ©termine si un enseignant fait parti du groupe
  * 
  * @param int L'id du conteneur
  * @param text Le login de l'enseignant
@@ -121,7 +121,7 @@ function est_enseignant($enseignant) {
  * 
  */
 function est_dans_groupe($conteneur,$enseignant) {
-  // l'utilisateur fait parti du groupe de l'évaluation ?
+  // l'utilisateur fait parti du groupe de l'Ã©valuation ?
   $sql = "SELECT 1=1 FROM `cn_conteneurs` cn, `cn_cahier_notes` no, `j_groupes_professeurs` po
             WHERE cn.id = '".$conteneur."'
 	      AND cn.id_racine = no.id_cahier_notes
@@ -135,13 +135,13 @@ function est_dans_groupe($conteneur,$enseignant) {
   return TRUE;
 }
 
-/** Renvoie les données d'une évaluation
+/** Renvoie les donnÃ©es d'une Ã©valuation
  * 
- * Renvoie un objet contenant les données d'une évaluation contenue cn_devoirs
- * dans  + un champ 'type' à Évaluation
+ * Renvoie un objet contenant les donnÃ©es d'une Ã©valuation contenue cn_devoirs
+ * dans  + un champ 'type' Ã  Ã‰valuation
  * 
- * @param int L'id de l'évaluation
- * @return object $retour Les données enregistrées dans cn_devoirs, FALSE sinon
+ * @param int L'id de l'Ã©valuation
+ * @return object $retour Les donnÃ©es enregistrÃ©es dans cn_devoirs, FALSE sinon
  *  
  */
 function charge_evaluation($evaluation)  {
@@ -153,23 +153,23 @@ function charge_evaluation($evaluation)  {
     return FALSE ;
   }
   if(mysql_num_rows($result)>1) {
-    echo 'on ne devrait jamais avoir 2 évaluations avec le même ID';
+    echo 'on ne devrait jamais avoir 2 Ã©valuations avec le mÃªme ID';
     die ();
   }
   while ($row = mysql_fetch_object($result)) {
      $retour = $row ;
-     $retour->type = 'Évaluation' ;
+     $retour->type = 'Ã‰valuation' ;
   }
   return $retour ;
  }
 
-/** Détermine si un enseignant peut supprimer une évaluation
+/** DÃ©termine si un enseignant peut supprimer une Ã©valuation
  * 
- * Récupère les données de l"évaluation avec charge_evaluation() et
- * vérifie que l'enseignant fait pati du bon groupe avec est_dans_groupe()
+ * RÃ©cupÃ¨re les donnÃ©es de l"Ã©valuation avec charge_evaluation() et
+ * vÃ©rifie que l'enseignant fait pati du bon groupe avec est_dans_groupe()
  * 
- * @param int L'id de l'évaluation
- * @return bool TRUE si l'enseignant peut supprimer l'évaluation, FALSE sinon
+ * @param int L'id de l'Ã©valuation
+ * @return bool TRUE si l'enseignant peut supprimer l'Ã©valuation, FALSE sinon
  * @see charge_evaluation()
  * @see est_dans_groupe()
  * 
@@ -182,10 +182,10 @@ function peut_supprimer_evaluation($evaluation) {
   return FALSE; 
 }
 
-/** Détermine si une évaluation contient des notes
+/** DÃ©termine si une Ã©valuation contient des notes
  * 
- * @param int L'id de l'évaluation
- * @return bool TRUE si l'évaluation n'a pas de note, FALSE sinon
+ * @param int L'id de l'Ã©valuation
+ * @return bool TRUE si l'Ã©valuation n'a pas de note, FALSE sinon
  * 
  */
 function evaluation_vide($evaluation) {
@@ -201,13 +201,13 @@ function evaluation_vide($evaluation) {
   return TRUE; 
 }
 
-/** Supprime une évaluation de la table cn_devoirs
+/** Supprime une Ã©valuation de la table cn_devoirs
  * 
- * Supprime l'évaluation de la table cn_devoirs 
- * et les enregistrement éventuels dans cn_notes_devoirs
+ * Supprime l'Ã©valuation de la table cn_devoirs 
+ * et les enregistrement Ã©ventuels dans cn_notes_devoirs
  * 
- * @param int L'id de l'évaluation
- * @return bool TRUE si l'évaluation n'a pas de note, FALSE sinon
+ * @param int L'id de l'Ã©valuation
+ * @return bool TRUE si l'Ã©valuation n'a pas de note, FALSE sinon
  * 
  */
 function supprime_evaluation($evaluation) {
@@ -224,12 +224,12 @@ function supprime_evaluation($evaluation) {
   return FALSE ;
 }
  
-/** Vérifie que les évaluations sont valides
+/** VÃ©rifie que les Ã©valuations sont valides
  * 
- * Vérifie que les évaluations stockées dans $_SESSION[PREFIXE]['id_devoir']
+ * VÃ©rifie que les Ã©valuations stockÃ©es dans $_SESSION[PREFIXE]['id_devoir']
  * existent bien dans la table cn_devoirs
  * 
- * Supprime au besoin les évaluations inconnues dans $_SESSION[PREFIXE]['id_devoir']
+ * Supprime au besoin les Ã©valuations inconnues dans $_SESSION[PREFIXE]['id_devoir']
  * 
  */ 
 function verifie_eval_visibles() {

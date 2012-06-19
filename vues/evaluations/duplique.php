@@ -2,8 +2,8 @@
 /** 
  * vue du module evaluations : action duplique
  * 
- * Duplique une évaluation dans un autre groupe
- * @author Régis Bouguin
+ * Duplique une Ã©valuation dans un autre groupe
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage duplique
  */
@@ -15,7 +15,7 @@
   <a name='contenu'></a>
   <a href="?action=voir">retour</a>
 
-  <h2>Dupliquer une évaluation</h2>
+  <h2>Dupliquer une Ã©valuation</h2>
   
   
   

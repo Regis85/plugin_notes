@@ -60,7 +60,7 @@ $titre_page = 'Saisie des notes';
 /** 
  * Inclusion du fichier de création du header
  */
-include CHEMIN_RACINE.'lib/header_template.inc.php';
+include CHEMIN_RACINE.'lib/header_template.inc';
 $tbs_CSS[]=array("fichier"=>CHEMIN_RACINE."templates/origine/css/bandeau.css"  , "rel"=>"stylesheet" , "type"=>"text/css" , "media"=>"screen" , "title"=>"");
 
 //=== Dernière connexion ===

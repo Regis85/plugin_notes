@@ -177,7 +177,7 @@ $num_eval=1;
   <tr class="entre_nom">
     <td>
       <?php echo $eleve['eleve']['nom']." ".$eleve['eleve']['prenom']; ?>
-	<?php // echo $eleve['login'] ?>
+	<?php echo $eleve['login'] ?>
       <p class="photos" 
 	 id="img_<?php echo $eleve['eleve']['elenoet']; ?>" 
 	 style ="text-align:center;">

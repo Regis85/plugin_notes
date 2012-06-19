@@ -1,12 +1,12 @@
 <?php
 /** Vue du module evaluations : action matiere
  * 
- * Création de sous-conteneurs
+ * CrÃ©ation de sous-conteneurs
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage matiere
- * @todo Créer un bouton pour ajouter Autocomplete et pouvoir choisir tout, numérique, rien
+ * @todo CrÃ©er un bouton pour ajouter Autocomplete et pouvoir choisir tout, numÃ©rique, rien
  * 
  */
 
@@ -36,7 +36,7 @@
     <?php } ?> 
 
     <fieldset>
-      <legend>Général</legend>
+      <legend>GÃ©nÃ©ral</legend>
       
       <label for="nom_eval">* Nom court : </label>
       <input type="text" 
@@ -58,7 +58,7 @@
       
       <label for="emplacement">* Emplacement :</label>
       <select name="emplacement" id="emplacement">
-	<!-- <option value=''>Sélectionnez un emplacement</option> -->
+	<!-- <option value=''>SÃ©lectionnez un emplacement</option> -->
       <?php
       /* */
       foreach ($sous_matieres as $conteneur) {
@@ -96,11 +96,11 @@
     <?php echo getSettingValue('gepi_denom_boite'); ?>
 	<img src="<?php echo CHEMIN_IMAGES; ?>icons/ico_question_petit.png" 
 	     alt="" 
-	     title="Précisions" 
+	     title="PrÃ©cisions" 
 	     onclick ="cache_montre_aide_coef();"/>
 	<span id="coef_long1">
 	  <br />
-	  Valeur de la pondération dans le calcul de la moyenne :
+	  Valeur de la pondÃ©ration dans le calcul de la moyenne :
 	</span>
 	<input type="text" 
 	       name="coefCont" 
@@ -119,7 +119,7 @@
       </p>
       
       <p class="center rouge">
-	Les champs précédés d'un * sont obligatoires
+	Les champs prÃ©cÃ©dÃ©s d'un * sont obligatoires
       </p>
       
     </fieldset>
@@ -127,19 +127,19 @@
     <fieldset>
       <legend>Moyenne</legend>
       
-      <label for="arrondi">* Précision du calcul de la moyenne :</label>
+      <label for="arrondi">* PrÃ©cision du calcul de la moyenne :</label>
       <select name="arrondi" id="arrondi">
 	<option value='<?php echo DIXIEME_SUP; ?>'<?php if ($affiche_conteneur['arrondir']==DIXIEME_SUP) echo " selected='selected'"; ?>>
-	  Arrondir au dixième de point supérieur
+	  Arrondir au dixiÃ¨me de point supÃ©rieur
 	</option>
 	<option value='<?php echo DEMI_SUP; ?>'<?php if ($affiche_conteneur['arrondir']==DEMI_SUP) echo " selected='selected'"; ?>>
-	  Arrondir au demi-point supérieur
+	  Arrondir au demi-point supÃ©rieur
 	</option>
 	<option value='<?php echo POINT_SUP; ?>'<?php if ($affiche_conteneur['arrondir']==POINT_SUP) echo " selected='selected'"; ?>>
-	  Arrondir au point entier supérieur
+	  Arrondir au point entier supÃ©rieur
 	</option>
 	<option value='<?php echo DIXIEME_PROCHE; ?>'<?php if ($affiche_conteneur['arrondir']==DIXIEME_PROCHE) echo " selected='selected'"; ?>>
-	  Arrondir au dixième de point le plus proche
+	  Arrondir au dixiÃ¨me de point le plus proche
 	</option>
 	<option value='<?php echo DEMI_PROCHE; ?>'<?php if ($affiche_conteneur['arrondir']==DEMI_PROCHE) echo " selected='selected'"; ?>>
 	  Arrondir au demi-point le plus proche
@@ -151,15 +151,15 @@
       
       
       <p>
-	Pondération
+	PondÃ©ration
 	<img src="<?php echo CHEMIN_IMAGES; ?>icons/ico_question_petit.png" 
 	     alt="" 
-	     title="Précisions" 
+	     title="PrÃ©cisions" 
 	     onclick ="cache_montre_aide_calcul();"/>
 	<span id="aide_calcul_note">
 	  <br />
 	  <em>
-	  Pour chaque élève, le coefficient de la meilleure note de 
+	  Pour chaque Ã©lÃ¨ve, le coefficient de la meilleure note de 
 	  <strong><?php echo $affiche_conteneur['nomCourt']; ?></strong>
 	  augmente ou diminue de :
 	  </em>
@@ -175,7 +175,7 @@
 	* Mode de calcul
 	<img src="<?php echo CHEMIN_IMAGES; ?>icons/ico_question_petit.png" 
 	     alt="" 
-	     title="Précisions" 
+	     title="PrÃ©cisions" 
 	     onclick ="cache_montre_aide_mode();"/>
 	<br />
 	<input type='radio' 
@@ -186,7 +186,7 @@
 	Tenir compte des options des <?php echo getSettingValue('gepi_denom_boite'); ?>s
 	<em id="mode_calcul_2">
 	<br />
-	  la moyenne s'effectue sur toutes les notes contenues à la racine de
+	  la moyenne s'effectue sur toutes les notes contenues Ã  la racine de
 	  <?php echo 'Nom de la boite'; ?> et 
 	  sur les moyennes des <?php echo getSettingValue('gepi_denom_boite'); ?>s, 
 	  en tenant compte des options dans celles-ci.
@@ -203,7 +203,7 @@
 	  la moyenne s'effectue sur toutes les notes contenues dans 
 	  <?php echo 'Nom de la boite'; ?> et dans ses 
 	  <?php echo getSettingValue('gepi_denom_boite'); ?>s, sans tenir compte des options 
-	  définies dans cette celles-ci.
+	  dÃ©finies dans cette celles-ci.
 	</em>
       
       </p> 
@@ -212,7 +212,7 @@
     
         
     <fieldset>
-      <legend>Affichage sur les relevés</legend>
+      <legend>Affichage sur les relevÃ©s</legend>
       <p>
 	
 	<input type="checkbox" 
@@ -220,7 +220,7 @@
 	       id="noteSurReleve" 
 	       value="1"
 	       <?php if ($affiche_conteneur['noteSurReleve']) echo ' checked="checked"'; ?> />
-	Faire apparaître la moyenne sur le relevé de notes destiné aux parents 
+	Faire apparaÃ®tre la moyenne sur le relevÃ© de notes destinÃ© aux parents 
 	
 	<br />
 	
@@ -229,10 +229,10 @@
 	       id="noteSurBulletin" 
 	       value="1"
 	       <?php if ($affiche_conteneur['noteSurBulletin']) echo ' checked="checked"'; ?> />
-	Faire apparaître la moyenne sur le bulletin scolaire.
+	Faire apparaÃ®tre la moyenne sur le bulletin scolaire.
 	<br />
 	<em>
-	  Si la case ci-dessus est cochée, la moyenne de cette sous-matière apparaît sur le bulletin scolaire, en plus de la moyenne générale, à titre d'information.
+	  Si la case ci-dessus est cochÃ©e, la moyenne de cette sous-matiÃ¨re apparaÃ®t sur le bulletin scolaire, en plus de la moyenne gÃ©nÃ©rale, Ã  titre d'information.
 	</em>
 	
       </p>

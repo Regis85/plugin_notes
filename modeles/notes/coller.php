@@ -2,19 +2,19 @@
 
 /** Modele du module notes : action coller 
  * 
- * Remplir une Èvaluation par copier/coller
+ * Remplir une √©valuation par copier/coller
  * 
- * @author RÈgis Bouguin
+ * @author R√©gis Bouguin
  * @package saisie_notes
  * @subpackage coller
  * @todo Effacer le saut de ligne de fin quand on colle depuis un tableur pour pouvoir tester aussi si on a trop de notes
- * @todo mettre ‡ jour les conteneurs
+ * @todo mettre √† jour les conteneurs
 */
 
-/** Les donnÈes de l'Èvaluation prises dans cn_devoirs
+/** Les donn√©es de l'√©valuation prises dans cn_devoirs
  * 
- * @param int $id_eval L'id de l'Èvaluation
- * @return array mixed Les donnÈes de l'Èvaluation
+ * @param int $id_eval L'id de l'√©valuation
+ * @return array mixed Les donn√©es de l'√©valuation
  * @see peut_noter_groupe()
  */
 function donnee_evaluation($id_eval) {
@@ -38,15 +38,15 @@ function donnee_evaluation($id_eval) {
   return $table_eval;
 }
 
-/** Charge les notes collÈes dans un tableau
+/** Charge les notes coll√©es dans un tableau
  * 
- * Recherche le caractËre de fin de ligne dans la chaine puis la dÈcoupe dans un tableau 
- * gr‚ce ‡ lui en vÈrifiant que les notes sont correctes
+ * Recherche le caract√®re de fin de ligne dans la chaine puis la d√©coupe dans un tableau 
+ * gr√¢ce √† lui en v√©rifiant que les notes sont correctes
  * 
  * 
- * @param string $colle_notes Les notes collÈes
- * @param int $id_eval id de l'Èvaluation
- * @return array|bool Les notes vÈrifiÈes et le statut ou FALSE
+ * @param string $colle_notes Les notes coll√©es
+ * @param int $id_eval id de l'√©valuation
+ * @return array|bool Les notes v√©rifi√©es et le statut ou FALSE
  * @see charge_message()
  * @see note_valide()
  */
@@ -56,7 +56,7 @@ function colle_notes($colle_notes,$id_eval) {
   $sql="SELECT note_sur FROM cn_devoirs WHERE id = '".$id_eval."'";
   $query = mysql_query($sql);
   if(0 == mysql_num_rows($query)) {
-    charge_message("ERREUR : L'Èvaluation n'a pas de note maximale de rÈfÈrence") ;
+    charge_message("ERREUR : L'√©valuation n'a pas de note maximale de r√©f√©rence") ;
     mysql_free_result($query);
     return FALSE;	  
   } else {
@@ -97,8 +97,8 @@ function colle_notes($colle_notes,$id_eval) {
 
 /** retourne dans un tableau le statut et la note si elle est valide
  * 
- * @param int $val L'entrÈe ‡ vÈrifier 
- * @param int $note_max La note maximale de l'Èvaluation
+ * @param int $val L'entr√©e √† v√©rifier 
+ * @param int $note_max La note maximale de l'√©valuation
  * @return array|bool Le tableau si la note est valide, FALSE sinon
  */
 function note_valide($val, $note_max) { 
@@ -106,7 +106,7 @@ function note_valide($val, $note_max) {
   if (is_numeric($val)) {
 
     if($val > $note_max) {
-      charge_message("ERREUR : Un ÈlËve ‡ une note en dehors du rÈfÈrentiel (".$val.") !") ;
+      charge_message("ERREUR : Un √©l√®ve √† une note en dehors du r√©f√©rentiel (".$val.") !") ;
       return FALSE;
     } else {
       $note = $val;
@@ -158,11 +158,11 @@ function note_valide($val, $note_max) {
 
 /** Traite les commentaires
  * 
- * Recherche le caractËre de fin de ligne dans la chaine puis la dÈcoupe dans un tableau gr‚ce ‡ lui
+ * Recherche le caract√®re de fin de ligne dans la chaine puis la d√©coupe dans un tableau gr√¢ce √† lui
  * 
- * @param string $colle_comments Les commentaires collÈs
- * @return text|bool Les commentaires vÈrifiÈs ou FALSE
- * @todo gÈrer les ' dans les commentaires
+ * @param string $colle_comments Les commentaires coll√©s
+ * @return text|bool Les commentaires v√©rifi√©s ou FALSE
+ * @todo g√©rer les ' dans les commentaires
  */
 function colle_comments($colle_comments) {
   // TODO : Effacer le saut de ligne de fin quand on colle depuis un tableur pour pouvoir tester aussi si on a trop de commentaires
@@ -189,13 +189,13 @@ function colle_comments($colle_comments) {
   
 }
 
-/** Enregistre les donnÈes collÈes dans la base
+/** Enregistre les donn√©es coll√©es dans la base
  * 
- * Enregistre les donnÈes en vÈrifiant si c'est une mise ‡ jour
+ * Enregistre les donn√©es en v√©rifiant si c'est une mise √† jour
  * 
- * met ‡ jour les moyennes de conteneurs
+ * met √† jour les moyennes de conteneurs
  * 
- * @return bool TRUE si les donnÈes ont ÈtÈ enregistrÈes, FALSE sinon
+ * @return bool TRUE si les donn√©es ont √©t√© enregistr√©es, FALSE sinon
  * @see charge_message()
  * @see mise_a_jour_moyennes_conteneurs()
  */
@@ -220,17 +220,17 @@ function enregistre_colle() {
       $statut = '';
     }
       
-    // On cherche s'il y a dÈj‡ un enregistrement
+    // On cherche s'il y a d√©j√† un enregistrement
     $sql= "SELECT 1=1 FROM cn_notes_devoirs 
              WHERE login = '".$eleve['login']."' 
              AND id_devoir = '".$_SESSION[PREFIXE]['eval_colle']."'";
     $query = mysql_query($sql);
     if (0 == mysql_num_rows($query)) {
-      // On a pas d'enregistrement, on le crÈe
+      // On a pas d'enregistrement, on le cr√©e
       $sql_table="INSERT INTO cn_notes_devoirs (login, id_devoir, note, comment, statut)
 		   VALUES ('".$eleve['login']."', '".$_SESSION[PREFIXE]['eval_colle']."', '".$note."', '".$comment."', '".$statut."')";
     } else {
-      // On a un enregistrement on le met ‡ jour
+      // On a un enregistrement on le met √† jour
       $envoi="";
       if ($note != '' || $statut != '') {
         $envoi="note = '".$eleve['note']."', statut= '".$eleve['statut']."'" ;
@@ -250,19 +250,19 @@ function enregistre_colle() {
     
     if (!mysql_query($sql_table)) {
 	charge_message("ERREUR : Echec de l'enregistrement dans la base ! (".$eleve['nom']." ".$eleve['prenom'].")") ;
-	charge_message("<bold>Collez ‡ nouveau vos donnÈes et vÈrifier les puis enregistrez ‡ nouveau</bold>") ;
+	charge_message("<bold>Collez √† nouveau vos donn√©es et v√©rifier les puis enregistrez √† nouveau</bold>") ;
 	mysql_free_result($sql_table);	
 	return FALSE;	
     }
     
     
-    // on met ‡ jour les moyennes de conteneurs
+    // on met √† jour les moyennes de conteneurs
     $_current_group["eleves"][$_SESSION[PREFIXE]['periode_num']]["list"][] = $eleve['login'];
     $arret='no';
     $sql_conteneur= "SELECT id_conteneur FROM cn_devoirs WHERE id = '".$_SESSION[PREFIXE]['eval_colle']."'";  
     $query_conteneur = mysql_query($sql_conteneur);  
     if (!$query_conteneur) {
-      charge_message("ERREUR : Echec de la mise ‡ jour des conteneurs") ;
+      charge_message("ERREUR : Echec de la mise √† jour des conteneurs") ;
       mysql_free_result($query_conteneur);
       return FALSE;	
     }

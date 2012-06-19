@@ -2,9 +2,9 @@
 
 /** Controleur du module notes : action coller 
  * 
- * Remplir une évaluation par copier/coller
+ * Remplir une Ã©valuation par copier/coller
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package saisie_notes
  * @subpackage coller
  * 
@@ -17,7 +17,7 @@
 include CHEMIN_MODELE.COLLER.'.php';
 
 //==================================
-// Décommenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
+// DÃ©commenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
 // $affiche_debug=debug_var();
 
 $notes_copier = $comments_copier = FALSE;
@@ -40,11 +40,11 @@ if (isset ($_POST['enregistrer'])) {
 	unset ($_SESSION[PREFIXE]['eval_colle']);
 	unset ($_SESSION[PREFIXE]['coller']);	
 	$_SESSION[PREFIXE]["post_reussi"] = TRUE;
-	charge_message("Enregistrement des données réussi !") ;
+	charge_message("Enregistrement des donnÃ©es rÃ©ussi !") ;
 	header("Location: index.php");
 	exit;   
       } else  {
-	charge_message("Erreur lors de l'enregistrement des données en copier/coller !") ;
+	charge_message("Erreur lors de l'enregistrement des donnÃ©es en copier/coller !") ;
       }
       break;
     case ABANDONNER:
@@ -60,7 +60,7 @@ $eleves=trouveEleves();
 // TODO : mettre dans le module
 if ($notes_copier) {
   if (count($notes_copier) < count($eleves)){
-    charge_message("ERREUR : Le nombre de notes (".count($notes_copier).") ne correspond pas au nombre d'élèves (".count($eleves).") !") ;
+    charge_message("ERREUR : Le nombre de notes (".count($notes_copier).") ne correspond pas au nombre d'Ã©lÃ¨ves (".count($eleves).") !") ;
     $notes_copier = FALSE;
   } else {
     $i=0;
@@ -75,7 +75,7 @@ if ($notes_copier) {
 
 if ($comments_copier){     
   if (count($comments_copier) < count($eleves)){
-    charge_message("ERREUR : Le nombre de commentaires (".count($comments_copier).") ne correspond pas au nombre d'élèves (".count($eleves).") !") ;
+    charge_message("ERREUR : Le nombre de commentaires (".count($comments_copier).") ne correspond pas au nombre d'Ã©lÃ¨ves (".count($eleves).") !") ;
     $comments_copier = FALSE;
   } else {
     $i=0;
@@ -90,7 +90,7 @@ if ($comments_copier){
 
 $evaluation = donnee_evaluation($_SESSION[PREFIXE][COLLER]);
 
-// on passe $eleves en $_SESSION[PREFIXE] pour pouvoir le récupérer lorsqu'on enregistre
+// on passe $eleves en $_SESSION[PREFIXE] pour pouvoir le rÃ©cupÃ©rer lorsqu'on enregistre
 $_SESSION[PREFIXE]['tableau_colle']=$eleves;
 $_SESSION[PREFIXE]['eval_colle']=$evaluation['id'];
 

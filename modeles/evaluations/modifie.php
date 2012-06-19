@@ -1,19 +1,19 @@
 <?php
 
-/** Modèle du module evaluations : action modifier
+/** ModÃ¨le du module evaluations : action modifier
  * 
  * Modifier le trimestre ou le groupe actif
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage modifier
  */
 
-/** Change le trimestre actif pour une valeur passée en POST ou en GET
+/** Change le trimestre actif pour une valeur passÃ©e en POST ou en GET
  *
  * @param array $valeur_POST
  * @param array $valeur_GET
- * @return bool TRUE si le trimestre à été changé, 
+ * @return bool TRUE si le trimestre Ã  Ã©tÃ© changÃ©, 
  */
 function regle_trimestre($valeur_POST, $valeur_GET) {
   $trimestre = !empty($valeur_POST['periode_num']) ? $valeur_POST['periode_num'] : ((!empty($valeur_GET['periode_num'])) ? $valeur_GET['periode_num'] : NULL) ;
@@ -24,20 +24,20 @@ function regle_trimestre($valeur_POST, $valeur_GET) {
   return FALSE;
 }
 
-/** Change le groupe actif pour une valeur passée en POST ou en GET
+/** Change le groupe actif pour une valeur passÃ©e en POST ou en GET
  *
  * Si le groupe change, on vide aussi le tableau de note
  * 
  * @param array $valeur_POST
  * @param array $valeur_GET
- * @return bool TRUE si le trimestre à été changé
+ * @return bool TRUE si le trimestre Ã  Ã©tÃ© changÃ©
  * @see efface_notes_session()
  * 
  */
 function regle_groupe($valeur_POST, $valeur_GET) {
   $groupe =!empty($valeur_POST['id_groupe']) ? $valeur_POST['id_groupe'] : ((!empty($valeur_GET['id_groupe'])) ? $valeur_GET['id_groupe'] : NULL) ;
   if ($groupe){ 
-    // On vérifie si on change de groupe et on vide les tableaux
+    // On vÃ©rifie si on change de groupe et on vide les tableaux
   if (isset ($_SESSION[PREFIXE]['id_groupe_session']) && $_SESSION[PREFIXE]['id_groupe_session'] != $groupe) {
    efface_notes_session();
   }
