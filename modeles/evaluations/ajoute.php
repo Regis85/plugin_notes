@@ -1,9 +1,9 @@
 <?php
-/** Modèles du module evaluations : action ajoute
+/** ModÃ¨les du module evaluations : action ajoute
  * 
- * Création d'une évaluation
+ * CrÃ©ation d'une Ã©valuation
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage ajoute
  * 
@@ -13,9 +13,9 @@
 /**
  * Fonction enregisteEval()
  * 
- * Enregistre les données de l'évaluation dans la base
+ * Enregistre les donnÃ©es de l'Ã©valuation dans la base
  * 
- * @return bolean int TRUE si l'enregistrement s'est bien passé, FALSE + un message sinon
+ * @return bolean int TRUE si l'enregistrement s'est bien passÃ©, FALSE + un message sinon
  */
 function enregisteEval() {
   // On vide les messages
@@ -28,7 +28,7 @@ function enregisteEval() {
 	  && !empty ($_POST['display_date'])
 	  && !empty ($_POST['date_ele_resp'])) {
     
-    // On récupère en session les données
+    // On rÃ©cupÃ¨re en session les donnÃ©es
     $donnees_passees = array();
     $donnees_passees['nomComplet'] = traitement_magic_quotes($_POST['nomComplet']);
     $donnees_passees['nom'] = traitement_magic_quotes($_POST['nom']);
@@ -60,12 +60,12 @@ function enregisteEval() {
     
     // facultatif moyenne
     //            - O entre dans le calcul
-    //            - B supérieures à 10 entrent dans le calcul
-    //            - N entre dans le calcul de la moyenne que si elle améliore la moyenne
+    //            - B supÃ©rieures Ã  10 entrent dans le calcul
+    //            - N entre dans le calcul de la moyenne que si elle amÃ©liore la moyenne
     If(isset ($_POST['moyenne'])) {
       $donnees_passees['moyenne'] = $_POST['moyenne'];
     } else {
-      charge_message("Vous n'avez pas défini la manière de prendre en compte la note dans la moyenne !");
+      charge_message("Vous n'avez pas dÃ©fini la maniÃ¨re de prendre en compte la note dans la moyenne !");
     }
       
     
@@ -73,28 +73,28 @@ function enregisteEval() {
     If(isset ($_POST['display_date'])) {
       $donnees_passees['display_date'] = prepare_date ($_POST['display_date']);
     } else {
-      charge_message("Vous n'avez pas défini la date d'affichage de l'évaluation !");
+      charge_message("Vous n'avez pas dÃ©fini la date d'affichage de l'Ã©valuation !");
     }
     
     // coef - coefEval
     If(isset ($_POST['coefEval'])) {
       $donnees_passees['coefEval'] = $_POST['coefEval'];
     } else {
-      charge_message("Vous n'avez pas défini le coefficient de l'évaluation !");
+      charge_message("Vous n'avez pas dÃ©fini le coefficient de l'Ã©valuation !");
     }
     
     // note_sur - noteSur
     If(isset ($_POST['noteSur'])) {
       $donnees_passees['noteSur'] = $_POST['noteSur'];
     } else {
-      charge_message("Vous n'avez pas défini la note maximale de l'évaluation !");
+      charge_message("Vous n'avez pas dÃ©fini la note maximale de l'Ã©valuation !");
     }
     
     // date_ele_resp - date_ele_resp
     If(isset ($_POST['date_ele_resp'])) {
       $donnees_passees['date_ele_resp'] = prepare_date ($_POST['date_ele_resp']);
     } else {
-      charge_message("Vous n'avez pas défini la date à laquelle les parents peuvent voir l'évaluation !");
+      charge_message("Vous n'avez pas dÃ©fini la date Ã  laquelle les parents peuvent voir l'Ã©valuation !");
     }
     
     // description - evalDescription    
@@ -113,7 +113,7 @@ function enregisteEval() {
     
     if(isset ($_POST['id_eval'])) {
       $donnees_passees['id_eval'] = $_POST['id_eval'];
-      // on a un id, on est en train de modifier une évaluation
+      // on a un id, on est en train de modifier une Ã©valuation
       $sql="UPDATE cn_devoirs 
 	      SET id_conteneur = '".$donnees_passees['emplacement']."',
 	          id_racine = '".$_SESSION[PREFIXE]['id_racine']."',
@@ -130,19 +130,19 @@ function enregisteEval() {
 		  date_ele_resp = '".$donnees_passees['date_ele_resp']."'
 	      WHERE id = '".$donnees_passees['id_eval']."'";
     } else {
-      // on n'a pas d'id, on est en train de créer une évaluation
+      // on n'a pas d'id, on est en train de crÃ©er une Ã©valuation
       $sql="INSERT INTO cn_devoirs (`id_conteneur`,`id_racine`,`nom_court`,`nom_complet`,`description`,`facultatif`,`date`,`coef`,`note_sur`,`ramener_sur_referentiel`,`display_parents`,`display_parents_app`,`date_ele_resp`)
 	VALUES ('".$donnees_passees['emplacement']."','".$_SESSION[PREFIXE]['id_racine']."','".$donnees_passees['nom']."','".$donnees_passees['nomComplet']."','".$donnees_passees['evalDescription']."','".$donnees_passees['moyenne']."','".$donnees_passees['display_date']."','".$donnees_passees['coefEval']."','".$donnees_passees['noteSur']."','".$donnees_passees['noteSur20']."','".$donnees_passees['noteSurReleve']."','".$donnees_passees['appSurReleve']."','".$donnees_passees['date_ele_resp']."')";
     }
     if (mysql_query($sql)) {
       return TRUE;
     } else {
-      charge_message("Échec lors de l'enregistrement dans la base");
+      charge_message("Ã‰chec lors de l'enregistrement dans la base");
       return FALSE;
     }
   }
   
-  charge_message("Des champs obligatoires n'ont pas été renseignés");
+  charge_message("Des champs obligatoires n'ont pas Ã©tÃ© renseignÃ©s");
   return FALSE;
 }
   
@@ -150,7 +150,7 @@ function enregisteEval() {
  * Fonction prepare_date
  * 
  * @param $traite_date text une date au format jj/mm/aaa
- * @return Date Date Une date au bon format pour être enregistrée dans la base
+ * @return Date Date Une date au bon format pour Ãªtre enregistrÃ©e dans la base
  * 
  */
 function prepare_date ($traite_date) {
@@ -170,8 +170,8 @@ function prepare_date ($traite_date) {
 /**
  * Fonction recharge_id($id_eval)
  * 
- * @param $id_eval int L'id de l'évaluation
- * @return Tableau mixed Les données de l'évaluation enregistrées dans la base
+ * @param $id_eval int L'id de l'Ã©valuation
+ * @return Tableau mixed Les donnÃ©es de l'Ã©valuation enregistrÃ©es dans la base
  * 
  */
 function recharge_id($id_eval) {
@@ -201,14 +201,14 @@ function recharge_id($id_eval) {
  * Fonction recharge_defaut()
  * 
  * 
- * @return Tableau mixed Des données par défaut pour une nouvelle évaluation
+ * @return Tableau mixed Des donnÃ©es par dÃ©faut pour une nouvelle Ã©valuation
  * 
  */
 function recharge_defaut() {
   $donnees_passees['id_eval'] = FALSE;
   $donnees_passees['emplacement'] = "";
-  $donnees_passees['nom'] = "Nouvelle évaluation";
-  $donnees_passees['nomComplet'] = "Nouvelle évaluation - nom long";
+  $donnees_passees['nom'] = "Nouvelle Ã©valuation";
+  $donnees_passees['nomComplet'] = "Nouvelle Ã©valuation - nom long";
   $donnees_passees['evalDescription'] = "";
   $donnees_passees['moyenne'] = "O";
   $donnees_passees['display_date'] = time();

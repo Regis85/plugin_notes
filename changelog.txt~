@@ -3,9 +3,8 @@
 TODO :
 - en Admin pouvoir nettoyer cn_notes_devoirs des évaluations orphelines
 
-version 0.3.0
+version 0.3.1
 - Passage en utf-8
-- adaptation à gepi 1.6.1 (non testé en 1.6.0 mais devrait fonctionner)
 
 version 0.2.3
 - Correction d'un bug sur la gestion des retours depuis la page supprime

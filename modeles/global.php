@@ -1,12 +1,12 @@
 <?php
-/** Fonctions utilisÈes dans plusieurs pages du plugin notes multiples
+/** Fonctions utilis√©es dans plusieurs pages du plugin notes multiples
  * 
- * @author RÈgis Bouguin
+ * @author R√©gis Bouguin
  * @package global
  * 
  */
 
-/** VÈrifie qu'un enseignant peut noter le groupe
+/** V√©rifie qu'un enseignant peut noter le groupe
  *
  * @param int $id_groupe Id du groupe
  * @return bool TRUE si l'enseignant peut noter, FALSE sinon 
@@ -21,16 +21,16 @@ function peut_noter_groupe($id_groupe) {
     return TRUE;
   }
   mysql_free_result($query);
-  $_SESSION[PREFIXE]['tbs_msg'] ="Vous ne pouvez pas noter ce groupe : ".mysql_num_rows($query)." renvoyÈ par <br />".$sql;
+  $_SESSION[PREFIXE]['tbs_msg'] ="Vous ne pouvez pas noter ce groupe : ".mysql_num_rows($query)." renvoy√© par <br />".$sql;
   return FALSE; 
 }
 
-/**Retourne les donnÈes du groupe actif
+/**Retourne les donn√©es du groupe actif
  * 
- * Retourne les donnÈes du groupe actif dans un tableau en utilisant la fonction get_group()
+ * Retourne les donn√©es du groupe actif dans un tableau en utilisant la fonction get_group()
  * 
  * @param int ID du groupe actif
- * @return array Tableaux imbriquÈs des informations du groupe
+ * @return array Tableaux imbriqu√©s des informations du groupe
  * @see get_group()
  */
 function recupere_groupe_actif($id_groupe_actif) {
@@ -39,23 +39,23 @@ function recupere_groupe_actif($id_groupe_actif) {
   return $groupe ; 
 }
 
-/** Renvoie un tableau avec des informations sur les ÈlËves
+/** Renvoie un tableau avec des informations sur les √©l√®ves
  * 
- * Renvoie un tableau avec pour chaque ÈlËves les champs nom, prenom, login, elenoet
+ * Renvoie un tableau avec pour chaque √©l√®ves les champs nom, prenom, login, elenoet
  * 
- * Charge un message d'erreur avec charge_message() en cas d'Èchec
+ * Charge un message d'erreur avec charge_message() en cas d'√©chec
  * 
- * @return mixed Tableau des donnÈes des ÈlËves ou False en cas d'Èchec
+ * @return mixed Tableau des donn√©es des √©l√®ves ou False en cas d'√©chec
  * @see charge_message()
  */
 function trouveEleves() {
   $table_eleves = FALSE ;
   if (!isset ($_SESSION[PREFIXE]['periode_num'])) {
-    charge_message("ERREUR : La pÈriode n'est pas dÈfinie !") ;
+    charge_message("ERREUR : La p√©riode n'est pas d√©finie !") ;
     return FALSE;
   }
   if (!isset ($_SESSION[PREFIXE]['id_groupe_session'])) {
-    charge_message("ERREUR : Le groupe n'est pas dÈfini !") ;
+    charge_message("ERREUR : Le groupe n'est pas d√©fini !") ;
     return FALSE;
   }
   
@@ -81,13 +81,13 @@ function trouveEleves() {
   
 }
 
-/** Renvoie un tableau de donnÈes sur un groupe
+/** Renvoie un tableau de donn√©es sur un groupe
  * 
  * Renvoie un tableau avec les champs id, name, description de la table 'groupes'
  * et un champ classes obtenu avec la fonction classe_groupe()
  * 
  * @param int Id du groupe
- * @return array|bool Le tableau de donnÈes si le groupe existe, FALSE sinon
+ * @return array|bool Le tableau de donn√©es si le groupe existe, FALSE sinon
  * @see classe_groupe()
  */
 function groupe_long($id_groupe){
@@ -107,13 +107,13 @@ function groupe_long($id_groupe){
   return FALSE;
 }
 
-/**Renvoie un tableau de donnÈes sur un groupe
+/**Renvoie un tableau de donn√©es sur un groupe
  * 
  * Renvoie un tableau avec les champs classe, nom_complet de la table 'classes',
  * le champ id_classe de la table 'j_groupes_classes' pour chaque classe du groupe
  * 
  * @param int Id du groupe
- * @return array|bool Le tableau de donnÈes si le groupe existe, FALSE sinon
+ * @return array|bool Le tableau de donn√©es si le groupe existe, FALSE sinon
  */
 function classe_groupe($id_groupe){
   $classes=array();
@@ -147,10 +147,10 @@ function classe_groupe($id_groupe){
  */
 function conteneurs() {
   
-  // dÈterminer le cahier de texte 
+  // d√©terminer le cahier de texte 
   $cn_cahier_texte = cahier_notes_object(); 
   if (!$cn_cahier_texte) {
-    // Le cahier de texte n'existe pas on le crÈe
+    // Le cahier de texte n'existe pas on le cr√©e
     $cn_cahier_texte = cree_carnet_notes($_SESSION[PREFIXE]['id_groupe_session']);
     if (!$cn_cahier_texte) {
       return FALSE;
@@ -168,13 +168,13 @@ function conteneurs() {
 }
 
 
-/** Retourne les donnÈes de cn_cahier_notes
+/** Retourne les donn√©es de cn_cahier_notes
  * 
- * Retourne les donnÈes de la table cn_cahier_notes dans un objet en utilisant 
+ * Retourne les donn√©es de la table cn_cahier_notes dans un objet en utilisant 
  * $_SESSION[PREFIXE]['id_groupe_session'] et $_SESSION[PREFIXE]['periode_num'] 
- * pour sÈlectionner les carnets de notes ‡ utiliser
+ * pour s√©lectionner les carnets de notes √† utiliser
  * 
- * @return object|bool donnÈes du cahier de texte, FALSE
+ * @return object|bool donn√©es du cahier de texte, FALSE
  */
 function cahier_notes_object() {
   $sql="SELECT cn.* FROM cn_cahier_notes cn
@@ -190,12 +190,12 @@ function cahier_notes_object() {
   return FALSE;
 }
 
-/** CrÈe un carnet de notes pour un groupe
+/** Cr√©e un carnet de notes pour un groupe
  * 
- * CrÈe un carnet de notes pour un groupe en enregistrant dans cn_cahier_notes un nouvel enregistrement
- * et en crÈant un enregistrement dans cn_conteneurs
+ * Cr√©e un carnet de notes pour un groupe en enregistrant dans cn_cahier_notes un nouvel enregistrement
+ * et en cr√©ant un enregistrement dans cn_conteneurs
  * 
- * @return bool TRUE si le carnet de note est crÈÈ, FALSE sinon
+ * @return bool TRUE si le carnet de note est cr√©√©, FALSE sinon
  * @see charge_message()
  * @see get_group()
  * 
@@ -214,22 +214,22 @@ function cree_carnet_notes($id_groupe) {
 			if ($reg) {
 				return (TRUE);
 			} else  {
-				charge_message("…chec lors de la crÈation du carnet de notes dans la base");
+				charge_message("√âchec lors de la cr√©ation du carnet de notes dans la base");
 				return FALSE;
 			}
 		} else  {
-		  charge_message("…chec de la crÈation du carnet de notes dans la base lors de la mise ‡ jour du conteneur");
+		  charge_message("√âchec de la cr√©ation du carnet de notes dans la base lors de la mise √† jour du conteneur");
 		  return FALSE;
 		}
   } else  {
-    charge_message("…chec de la crÈation du carnet de notes dans la base lors de la crÈation du conteneur");
+    charge_message("√âchec de la cr√©ation du carnet de notes dans la base lors de la cr√©ation du conteneur");
     return FALSE;
   }
 }
 
-/** retourne les matiËres du cahier de texte
+/** retourne les mati√®res du cahier de texte
  * 
- * Retourne les donnÈes de la table cn_conteneurs dans un tableau
+ * Retourne les donn√©es de la table cn_conteneurs dans un tableau
  * 
  * @param $int Id du conteneur racine
  * @return array Tableau d'objets de tous les sous-conteneurs du conteneur
@@ -253,15 +253,15 @@ function toutes_matieres_cnotes($conteneur) {
 
 /* ===== Trimestres ===== */
 
-/** Retourne les donnÈes du trimestre
+/** Retourne les donn√©es du trimestre
  * 
  * Retourne les champs de la table 'periodes' dans un objet, pour un trimestre,
  * en utilisant classe_groupe($_SESSION[PREFIXE]['id_groupe_session']) 
- * et $_SESSION[PREFIXE]['periode_num'] par dÈfaut
+ * et $_SESSION[PREFIXE]['periode_num'] par d√©faut
  * 
  * @param int Id du trimestre
  * @param int Id du groupe
- * @return object $row Les donnÈes du trimestre
+ * @return object $row Les donn√©es du trimestre
  * @see classe_groupe()
  */
 function nom_trimestre($id_trim = FALSE, $id_classe = FALSE) {
@@ -283,14 +283,14 @@ function nom_trimestre($id_trim = FALSE, $id_classe = FALSE) {
   return FALSE;
 }
 
-/** DÈtermine la pÈriode active
+/** D√©termine la p√©riode active
  * 
- * Si $_POST["periode_num"] ou $_GET["periode_num"] sont renseignÈs, 
+ * Si $_POST["periode_num"] ou $_GET["periode_num"] sont renseign√©s, 
  * les mets dans $_SESSION[PREFIXE]['periode_num']
  * 
- * Utilise $_SESSION[PREFIXE]['periode_num'] pour renvoyer la pÈriode active
+ * Utilise $_SESSION[PREFIXE]['periode_num'] pour renvoyer la p√©riode active
  * 
- * @return int Le numÈro de la pÈriode 
+ * @return int Le num√©ro de la p√©riode 
  */
 function recupere_periode_active() {
   $id_periode = isset($_POST["periode_num"]) ? $_POST["periode_num"] : (isset($_GET["periode_num"]) ? $_GET["periode_num"] : NULL);
@@ -305,21 +305,21 @@ function recupere_periode_active() {
   return $id_periode;
 }
 
-/** Renvoie les pÈriodes d'un groupe
+/** Renvoie les p√©riodes d'un groupe
  * 
- * Renvoie un tableau de toutes les pÈriodes d'un groupe
+ * Renvoie un tableau de toutes les p√©riodes d'un groupe
  * 
  * Chaque ligne contient les champs  periode_num, periode_nom, periode_close
  *
- * @param array un groupe formatÈ avec recupere_groupe_actif()
- * @return array Les donnÈes de la pÈriode
+ * @param array un groupe format√© avec recupere_groupe_actif()
+ * @return array Les donn√©es de la p√©riode
  * @see recupere_groupe_actif()
  */
 function recupere_periodes($current_group){
   $retour=array();
   $i="1";
 
-  // On vÈrifie si la pÈriode est ouverte
+  // On v√©rifie si la p√©riode est ouverte
   while ($i < ($current_group["nb_periode"])) {
     $periode_close=FALSE;
     $sql="SELECT * FROM periodes WHERE num_periode='$i' 
@@ -349,10 +349,10 @@ function efface_notes_session() {
 
 /**Charge un message dans $_SESSION[PREFIXE]['tbs_msg']
  * 
- * Ajoute un texte ‡ $_SESSION[PREFIXE]['tbs_msg'] pour qu'il soit afficher dans la zone de messages 
+ * Ajoute un texte √† $_SESSION[PREFIXE]['tbs_msg'] pour qu'il soit afficher dans la zone de messages 
  * en haut de la page
  *
- * @param text Le texte ‡ affichÈ dans la zone message 
+ * @param text Le texte √† affich√© dans la zone message 
  */
 function charge_message($ajoute_message) {
   if (isset ($_SESSION[PREFIXE]['tbs_msg']) && $_SESSION[PREFIXE]['tbs_msg']!="") {
@@ -364,10 +364,10 @@ function charge_message($ajoute_message) {
   
 }
 
-/** PrÈpare le texte pour Ítre passÈ dans une requÍte SQL
+/** Pr√©pare le texte pour √™tre pass√© dans une requ√™te SQL
  *
- * @param textarea $val Le texte ‡ vÈrifier
- * @return textarea Le texte formatÈ
+ * @param textarea $val Le texte √† v√©rifier
+ * @return textarea Le texte format√©
  */
 function prepare_sql($val) {
   $texte = corriger_caracteres($val);

@@ -1,18 +1,18 @@
 <?php 
 /** Vue du module evaluations : action voir 
  * 
- * Affichage de l'arborescence des boites et des évaluations
+ * Affichage de l'arborescence des boites et des Ã©valuations
  * 
  * @package arborescence
  * @subpackage voir
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * 
  */
 
 /** Affichage des conteneurs
  * 
  * Construit l'arborescence des conteneurs 
- * et appelle affiche_evaluations() pour afficher les évaluations
+ * et appelle affiche_evaluations() pour afficher les Ã©valuations
  * 
  * @see affiche_evaluations()
  */
@@ -62,7 +62,7 @@ function affiche_sous_conteneur($sous_eval) {?>
   </li>  
   <?php } ?> 
   
-  <!-- On affiche les évaluations -->
+  <!-- On affiche les Ã©valuations -->
    
     <?php if (!empty($sous_eval['evaluation'])){  ?>
   <li style="list-style-type: none;">
@@ -75,9 +75,9 @@ function affiche_sous_conteneur($sous_eval) {?>
     <?php } 
 }
 
-/** Affichage des évaluations
+/** Affichage des Ã©valuations
  * 
- * Ajoute les évaluations à l'arborescence des conteneurs 
+ * Ajoute les Ã©valuations Ã  l'arborescence des conteneurs 
  * 
  */
 function affiche_evaluations($sous_eval) { ?>
@@ -105,14 +105,14 @@ function affiche_evaluations($sous_eval) { ?>
       if ($sous_eval["display_parents"]) { ?>
 	<img src='<?php echo CHEMIN_RACINE ?>images/icons/visible.png' 
 	     width='19' height='16' 
-	     title='Évaluation visible sur le bulletin' 
-	     alt='Évaluation visible sur le bulletin' />
+	     title='Ã‰valuation visible sur le bulletin' 
+	     alt='Ã‰valuation visible sur le bulletin' />
      <?php
       } else { ?>
 	<img src='<?php echo CHEMIN_RACINE ?>images/icons/invisible.png' 
 	     width='19' height='16'
-	     title='Évaluation non visible sur le bulletin'
-	     alt='Évaluation non visible sur le bulletin' />
+	     title='Ã‰valuation non visible sur le bulletin'
+	     alt='Ã‰valuation non visible sur le bulletin' />
      <?php
       }
     ?>)
@@ -139,7 +139,7 @@ function affiche_evaluations($sous_eval) { ?>
 	<fieldset>
 	  <legend>Import/Export</legend>
 	  <input type="hidden" name="action" value="modifie" />
-	  <label for="import_export" class="invisible">Choix d'une action à effectuer</label>
+	  <label for="import_export" class="invisible">Choix d'une action Ã  effectuer</label>
 	  <select name='<?php echo IMPORT ?>' id='import_export' onchange="this.form.submit();">
 	    <option value=''>Choisir une action</option>
 	    <option value='<?php echo EXPORTER ?>'>- Exporter les notes</option>
@@ -148,7 +148,7 @@ function affiche_evaluations($sous_eval) { ?>
   <?php } ?>
 	  </select>
 	  <input type="submit"
-		 value="Éxecuter"
+		 value="Ã‰xecuter"
 		 id="btn_save_export"/>
 	  <script type="text/javascript">
 //<![CDATA[
@@ -159,25 +159,25 @@ function affiche_evaluations($sous_eval) { ?>
       </form>
     </div>
     
-    <!-- Créer la structure --> 
+    <!-- CrÃ©er la structure --> 
     <div class="colonne ie_centre">
   <?php if ($periode_ouverte) {?>
       <form enctype="multipart/form-data" id= "form3" action="index.php" method="post">
 	<fieldset>
-	  <legend>Créer</legend>
+	  <legend>CrÃ©er</legend>
 	  <input type="hidden" name="action" value="ajoute" />
-	  <label for="creation" class="invisible">Choix d'un conteneur à créer</label>
+	  <label for="creation" class="invisible">Choix d'un conteneur Ã  crÃ©er</label>
 	  <select name='<?php echo CREATION ;?>' id='creation' onchange="this.form.submit();"> 
-	    <option value=''>Sélectionner le type de conteneur...</option>
-	    <option value='<?php echo EVALUATION ;?>'>- Évaluation</option>
-	    <option value='<?php echo CUMUL ;?>'>- Évaluation-cumul</option>
+	    <option value=''>SÃ©lectionner le type de conteneur...</option>
+	    <option value='<?php echo EVALUATION ;?>'>- Ã‰valuation</option>
+	    <option value='<?php echo CUMUL ;?>'>- Ã‰valuation-cumul</option>
 	    <option value='<?php echo MATIERE ;?>'>- <?php echo ucfirst (getSettingValue('gepi_denom_boite')); ?></option>
 	    <?php if ($_SESSION[PREFIXE]['periode_num']>1) { ;?>
-	    <option value='<?php echo IDEM ;?>'>- Structure identique à la période précédente</option>
+	    <option value='<?php echo IDEM ;?>'>- Structure identique Ã  la pÃ©riode prÃ©cÃ©dente</option>
 	    <?php } ;?>
 	  </select>
 	  <input type="submit"
-		 value="Éxecuter"
+		 value="Ã‰xecuter"
 		 id="btn_save_creer"/>
 	  <script type="text/javascript">
 //<![CDATA[
@@ -216,7 +216,7 @@ function affiche_evaluations($sous_eval) { ?>
     <?php } else { ?>
       <label for="choix_groupe" >Groupe :</label>
       <select name='id_groupe' id="choix_groupe" onchange="this.form.submit();"> 
-	<option value=''>Sélectionnez un groupe</option>
+	<option value=''>SÃ©lectionnez un groupe</option>
       <?php foreach($tous_groupes as $group) { ?>
 	<option value='<?php echo $group["id"]; ?>'<?php 
 		if( isset ($_SESSION[PREFIXE]['id_groupe_session']) && $group["id"]==$_SESSION[PREFIXE]['id_groupe_session']) {?>
@@ -229,7 +229,7 @@ function affiche_evaluations($sous_eval) { ?>
   <?php } ?>
     
 	  <input type="submit"
-		 value="Sélectionner"
+		 value="SÃ©lectionner"
 		 id="btn_choix_groupe"/>
 	  <script type="text/javascript">
 //<![CDATA[
@@ -237,11 +237,11 @@ function affiche_evaluations($sous_eval) { ?>
 //]]>
 	  </script>
     
-  <!-- Périodes d'enseignements -->  
+  <!-- PÃ©riodes d'enseignements -->  
   <?php if (!empty($periodes)) { ?> 
-      <label for="periode_num" >Période :</label>
+      <label for="periode_num" >PÃ©riode :</label>
       <select name='periode_num' id='periode_num' onchange="this.form.submit();"> 
-	<option value=''>Sélectionnez une période</option>
+	<option value=''>SÃ©lectionnez une pÃ©riode</option>
       <?php foreach($periodes as $periode) { ?>
 	<option value='<?php echo $periode["periode_num"]; ?>'
 		<?php if( isset ($_SESSION[PREFIXE]['periode_num']) && $periode["periode_num"]==$_SESSION[PREFIXE]['periode_num']) {?>
@@ -250,14 +250,14 @@ function affiche_evaluations($sous_eval) { ?>
 		>
 	  <?php echo $periode["periode_nom"]; ?>
 	  <?php if ($periode["periode_close"]===TRUE) { ?>
-	      (période close)
+	      (pÃ©riode close)
 	  <?php }?>
 	</option>
       <?php }?>
       </select>
       
       <input type="submit"
-	     value="Sélectionner"
+	     value="SÃ©lectionner"
 	     id="btn_choix_periode"/>
       <script type="text/javascript">
 //<![CDATA[
@@ -270,7 +270,7 @@ function affiche_evaluations($sous_eval) { ?>
   </form>
   
   <p class="invisible">
-    <a name='contenu' id="contenu">Début de la page</a>
+    <a name='contenu' id="contenu">DÃ©but de la page</a>
   </p>
   
    <!-- Carnet de notes -->
@@ -287,16 +287,16 @@ function affiche_evaluations($sous_eval) { ?>
   <?php } ?>
       
       
-  <!-- Évaluations -->        
+  <!-- Ã‰valuations -->        
    
     <?php if (!empty($eval_toutes)) { ?>
-    <h3>Liste des évaluations du carnet de notes</h3>
+    <h3>Liste des Ã©valuations du carnet de notes</h3>
     <ul>
     <?php foreach($eval_toutes as $evaluation) {  ?>
       <li>
       <?php echo $evaluation['nom_complet']; ?>
       <?php if ($evaluation['close']) { ?>
-	(période close)
+	(pÃ©riode close)
 	<a href='<?php echo CHEMIN_RACINE ?>cahier_notes/saisie_notes.php?id_conteneur=<?php echo $evaluation["id"]; ?>'>
 	  Visualisation
 	</a>

@@ -1,17 +1,11 @@
 <?php
 /** Pied de page du plugin notes multiples
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package global
  * @subpackage affichage 
  */
 ?>
-
-<!--
-	<script type='text/javascript'>
-		temporisation_chargement='ok';
-	</script>
--->
 
 	<script type='text/javascript'>
 	cacher_div('personnes_connectees');
@@ -24,7 +18,7 @@
 		<?php
 			if ($tbs_microtime!="") {
 				echo "
-   <p class='microtime'>Page générée en ";
+   <p class='microtime'>Page gÃ©nÃ©rÃ©e en ";
    			echo $tbs_microtime;
 				echo " sec</p>
    			";

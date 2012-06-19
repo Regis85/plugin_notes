@@ -1,9 +1,9 @@
 <?php   
 /** Controleur du module evaluations : action ajoute
  * 
- * Création d'une évaluation
+ * CrÃ©ation d'une Ã©valuation
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage ajoute
  * 
@@ -16,14 +16,14 @@
   include CHEMIN_MODELE."/".AJOUTE.'.php';
 
   //==================================
-  // Décommenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
-  // $affiche_debug=debug_var();
+  // DÃ©commenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
+   $affiche_debug=debug_var();
 
-  // vérifier que le prof peut noter le groupe
+  // vÃ©rifier que le prof peut noter le groupe
   
   
   $mode_creation= isset ($_POST['creation']) ? $_POST['creation'] : (isset ($_GET['creation']) ? $_GET['creation'] : NULL);
-  // réorienter vers le bon mode de création/modification
+  // rÃ©orienter vers le bon mode de crÃ©ation/modification
   switch ($mode_creation) {
     case MATIERE:
       $_SESSION[PREFIXE]['contexte_action']=MATIERE;
@@ -31,6 +31,10 @@
       die ();
     case EVALUATION:
       break;
+    case DUPLIQUE:
+      $_SESSION[PREFIXE]['contexte_action']=DUPLIQUE;
+      header("Location: index.php?id_devoir=".$_POST['id_eval']."&id_conteneur=".$_POST['id_conteneur']."");
+      die ();
     case CUMUL:
       $_SESSION[PREFIXE]['contexte_action']=CUMUL;
       header("Location: index.php");
@@ -47,10 +51,10 @@
       die ();
   }
 
-  // récupérer les données du groupe
+  // rÃ©cupÃ©rer les donnÃ©es du groupe
   $classes_groupe=groupe_long($_SESSION[PREFIXE]['id_groupe_session']);
 
-  // récupérer les conteneurs qui peuvent accueillir une évaluation
+  // rÃ©cupÃ©rer les conteneurs qui peuvent accueillir une Ã©valuation
   $sous_matieres=conteneurs();
 
   if (empty ($sous_matieres)) {
@@ -65,52 +69,52 @@
 		}
   }
   
-  // Vérifier si on veut abandonner 
+  // VÃ©rifier si on veut abandonner 
   if (isset ($_POST['mode']) && $_POST['mode']==ABANDONNER) {
-    // on vide les données en mémoire
+    // on vide les donnÃ©es en mÃ©moire
     unset ($_SESSION[PREFIXE]['add_change_eval']);
-    // TODO : gérer le retour
+    // TODO : gÃ©rer le retour
     $_SESSION[PREFIXE]['contexte_action']=VOIR;
     $_SESSION[PREFIXE]['action']=VOIR;
-    charge_message("Enregistrement de l'évaluation abandonné");
+    charge_message("Enregistrement de l'Ã©valuation abandonnÃ©");
     header("Location: index.php");
     die ();
     
   }
-  // Vérifier si on veut enregistrer 
+  // VÃ©rifier si on veut enregistrer 
   if (isset ($_POST['mode']) && $_POST['mode']==ENREGISTRER) {
     check_token();
-    // on vide les données en mémoire
+    // on vide les donnÃ©es en mÃ©moire
     unset ($_SESSION[PREFIXE]['add_change_eval']);
     if(enregisteEval()) {
-    // TODO : gérer le retour
+    // TODO : gÃ©rer le retour
       $_SESSION[PREFIXE]['contexte_module']=MODULE_DEFAUT;
       $_SESSION[PREFIXE]['contexte_action']=VOIR;
       $_SESSION[PREFIXE]['action']=VOIR;
       unset ($_SESSION[PREFIXE]['add_change_eval']);
       $_SESSION[PREFIXE]['post_reussi']=TRUE;
-      charge_message("Enregistrement de l'évaluation réussie");
+      charge_message("Enregistrement de l'Ã©valuation rÃ©ussie");
       header("Location: index.php");
       die ();
 
     } else {
-      charge_message("Echec de l'enregistrement de l'évaluation");	   
+      charge_message("Echec de l'enregistrement de l'Ã©valuation");	   
     }
   }
   
-  // On n'a pas enregistré
+  // On n'a pas enregistrÃ©
   if (isset ($_SESSION[PREFIXE]['add_change_eval'])) {
-    // si on a des données en $session on les récupère
+    // si on a des donnÃ©es en $session on les rÃ©cupÃ¨re
     $affiche_eval = $_SESSION[PREFIXE]['add_change_eval'];
     
   } else {
-    // Sinon, on vérifie si on veut modifier une évaluation
+    // Sinon, on vÃ©rifie si on veut modifier une Ã©valuation
     $id_devoir = isset ($_POST['id_devoir']) ? $_POST['id_devoir'] : (isset ($_GET['id_devoir']) ? $_GET['id_devoir'] : NULL);
     if (!empty ($id_devoir)) {
-    // si on passe un id, on récupère l'évaluation
+    // si on passe un id, on rÃ©cupÃ¨re l'Ã©valuation
       $affiche_eval = recharge_id($id_devoir);
     } else {
-    // Sinon on initialise avec des données par défaut
+    // Sinon on initialise avec des donnÃ©es par dÃ©faut
       $affiche_eval = recharge_defaut();
     }
   }

@@ -1,9 +1,9 @@
 <?php
 /** Vue du module notes : action coller
  * 
- * Remplir une évaluation par copier/coller
+ * Remplir une Ã©valuation par copier/coller
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package saisie_notes
  * @subpackage coller
  * 
@@ -24,18 +24,18 @@ unset ($classe) ?>
 </h2>
 
 <p class="center">
-  On utilise les sauts de lignes pour différencier les données de chaque élève 
+  On utilise les sauts de lignes pour diffÃ©rencier les donnÃ©es de chaque Ã©lÃ¨ve 
   aussi vous ne pouvez pas importer des commentaires avec saut de ligne.
 </p>
 <p class="center">
-  Si vous avez plus de données que d'élèves, les données en trop sont ignorées 
-  mais aucun message d'alerte n'est affiché.
+  Si vous avez plus de donnÃ©es que d'Ã©lÃ¨ves, les donnÃ©es en trop sont ignorÃ©es 
+  mais aucun message d'alerte n'est affichÃ©.
 </p>
 <p class="center">
-  Si votre import provoque une erreur, les données ne sont pas conservées.
+  Si votre import provoque une erreur, les donnÃ©es ne sont pas conservÃ©es.
 </p>
 <p class="center gras">
-  Vérifiez bien vos données avant d'enregistrer, cette page écrase les anciennes valeurs sans faire de test.
+  VÃ©rifiez bien vos donnÃ©es avant d'enregistrer, cette page Ã©crase les anciennes valeurs sans faire de test.
 </p>
 
   <form enctype="multipart/form-data" 
@@ -52,10 +52,10 @@ unset ($classe) ?>
       <input type="submit" name="enregistrer" value="<?php  echo ABANDONNER; ?>" />
     </p>
   <table id="tb_copie" class="colonne" style="text-align: left; width: 45%;">
-  <caption>Liste des élèves</caption>
+  <caption>Liste des Ã©lÃ¨ves</caption>
   <tr>
     <th>
-      Nom Prénom
+      Nom PrÃ©nom
     </th>
     <?php if ($notes_copier) { ?>
     <th>

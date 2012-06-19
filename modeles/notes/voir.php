@@ -1,17 +1,17 @@
 <?php
-/** Modèle du module notes : action voir
+/** ModÃ¨le du module notes : action voir
  * 
- * Afficher et modifier les notes d'une ou plusieurs évaluations
+ * Afficher et modifier les notes d'une ou plusieurs Ã©valuations
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package saisie_notes
  * @subpackage voir
- * @todo mettre à jour les conteneurs (voir coller ligne 259) 
+ * @todo mettre Ã  jour les conteneurs (voir coller ligne 259) 
  */
 
-/** Renvoie les évaluations de la période
+/** Renvoie les Ã©valuations de la pÃ©riode
  * 
- * Renvoie un tableau des évaluations de la période avec les champs
+ * Renvoie un tableau des Ã©valuations de la pÃ©riode avec les champs
  * 
  * id (cn_devoirs.id), nom_court (cn_devoirs.nom_court), periode (cn_cahier_notes.periode),
  *  conteneur (cn_conteneurs.nom_court)
@@ -41,10 +41,10 @@ function evaluations_disponibles() {
   return $table_eval;
 }
 
-/** Renvoie les évaluations qui n'ont pas été choisies
+/** Renvoie les Ã©valuations qui n'ont pas Ã©tÃ© choisies
  *
- * @param array $evaluations tableau de toutes les évaluations
- * @return array tableau des évaluations non choisies
+ * @param array $evaluations tableau de toutes les Ã©valuations
+ * @return array tableau des Ã©valuations non choisies
  */
 function eval_non_choisies($evaluations) {
   $eval_possibles=array();
@@ -57,11 +57,11 @@ function eval_non_choisies($evaluations) {
   return $eval_possibles;
 }
 
-/** Vérifie que les évaluations appartiennent bien au groupe
+/** VÃ©rifie que les Ã©valuations appartiennent bien au groupe
  *
- * @param type $tableau_id_devoir tableau des Id de devoirs à vérifier
+ * @param type $tableau_id_devoir tableau des Id de devoirs Ã  vÃ©rifier
  * @param type $id_groupe L'identifiant du groupe
- * @return array|bool Les devoirs du groupe ou FALSE si une évaluation n'appartient pas au groupe
+ * @return array|bool Les devoirs du groupe ou FALSE si une Ã©valuation n'appartient pas au groupe
  */
 function eval_du_groupe($tableau_id_devoir, $id_groupe) {
   // Les devoirs appartiennent-ils aux groupes ? 
@@ -81,10 +81,10 @@ function eval_du_groupe($tableau_id_devoir, $id_groupe) {
   return $devoirs_groupe;
 }
 
-/** Vérifie que des évaluations sont bien dans une période
+/** VÃ©rifie que des Ã©valuations sont bien dans une pÃ©riode
  *
- * @param array $tableau_id_devoir tableau des Id des devoirs à vérifier
- * @param type $periode la période de référence
+ * @param array $tableau_id_devoir tableau des Id des devoirs Ã  vÃ©rifier
+ * @param type $periode la pÃ©riode de rÃ©fÃ©rence
  * @return  array tableau des Id des devoirs valides
  */
 function eval_dans_periode($tableau_id_devoir , $periode) {
@@ -109,18 +109,18 @@ function eval_dans_periode($tableau_id_devoir , $periode) {
   return $devoirs_groupe;
 }
 
-/** Renvoie les évaluations modifiables
+/** Renvoie les Ã©valuations modifiables
  * 
- * Une évaluation est modifiable si : C'est le groupe actif, elle est dans une période ouverte, 
+ * Une Ã©valuation est modifiable si : C'est le groupe actif, elle est dans une pÃ©riode ouverte, 
  * l'enseignant peut la noter
  * 
- * Renvoie un tableau des évaluation valides
+ * Renvoie un tableau des Ã©valuation valides
  * 
  *'id', 'nom_court', 'referentiel', 'date', 'coef', 'display_parents', 'conteneur', 'tab_notes', 'note_sur'
  * SELECT cn_devoirs.id, cn_devoirs.date, cn_devoirs.nom_court, cn_devoirs.ramener_sur_referentiel, 
  * cn_conteneurs.nom_court AS conteneur, cn_devoirs.display_parents, cn_devoirs.coef, cn_devoirs.note_sur
  * 
- * @return array les évaluation valides
+ * @return array les Ã©valuation valides
  * @see eval_du_groupe()
  * @see eval_dans_periode()
  * @see statistique()
@@ -133,15 +133,15 @@ function evaluations_modifiables() {
     return FALSE;
   }
     
-  $table_evaluations=array(); // tableau de toutes les évaluations valides
+  $table_evaluations=array(); // tableau de toutes les Ã©valuations valides
   $periode_ouverte=FALSE;
   $devoirs_groupe=array();
       
   $devoirs_groupe = eval_du_groupe($_SESSION[PREFIXE]["id_devoir"],$_SESSION[PREFIXE]['id_groupe_session']);
   
   if (!$devoirs_groupe)  {
-    charge_message("Vous avez sélectionné des devoirs qui n'appartiennent pas à ce groupe
-      <br />ceci ne devrait jamais arrivé");
+    charge_message("Vous avez sÃ©lectionnÃ© des devoirs qui n'appartiennent pas Ã  ce groupe
+      <br />ceci ne devrait jamais arrivÃ©");
     charge_message("groupe : ".$_SESSION[PREFIXE]['id_groupe_session']);
     charge_message("devoir :");
     foreach ($_SESSION[PREFIXE]["id_devoir"] as $montre_devoir) {
@@ -159,7 +159,7 @@ function evaluations_modifiables() {
     $_SESSION[PREFIXE]["id_devoir"] = $devoirs_groupe;
   }
   
-  // On recherche les périodes ouvertes des classes du groupe
+  // On recherche les pÃ©riodes ouvertes des classes du groupe
   $sql_periodes="SELECT cl.id_classe, pe.nom_periode, pe.verouiller, UNIX_TIMESTAMP(pe.date_verrouillage) AS date_verrouillage
                FROM periodes pe, j_groupes_classes cl
                WHERE cl.id_groupe = '".$_SESSION[PREFIXE]['id_groupe_session']."'
@@ -169,8 +169,8 @@ function evaluations_modifiables() {
   $query_periodes = mysql_query($sql_periodes);
   
   if(mysql_num_rows($query_periodes)==0) {
-    // il n'y a pas de période ouverte
-    charge_message("Il n'y a pas de période ouverte");
+    // il n'y a pas de pÃ©riode ouverte
+    charge_message("Il n'y a pas de pÃ©riode ouverte");
     mysql_free_result($query_periodes);
     return FALSE; 
   }
@@ -179,10 +179,10 @@ function evaluations_modifiables() {
   unset ($devoirs_groupe);
   $devoirs_groupe=array();
 
-  // On vérifie que les devoirs sont bien dans la période ouverte
+  // On vÃ©rifie que les devoirs sont bien dans la pÃ©riode ouverte
   $devoirs_groupe = eval_dans_periode($_SESSION[PREFIXE]["id_devoir"], $_SESSION[PREFIXE]['periode_num']);    
   if (!$devoirs_groupe) {
-    charge_message("Aucun devoir choisi n'est dans la période ouverte");
+    charge_message("Aucun devoir choisi n'est dans la pÃ©riode ouverte");
     return FALSE;
   }
   
@@ -196,7 +196,7 @@ function evaluations_modifiables() {
   }
 
   if (isset ($_SESSION[PREFIXE]["id_devoir"]) && count($_SESSION[PREFIXE]["id_devoir"]) > 0) {
-    // On renvoie les infos des évaluations
+    // On renvoie les infos des Ã©valuations
     foreach ($_SESSION[PREFIXE]["id_devoir"] as $devoir) {
       $sql_eval="SELECT de.id, UNIX_TIMESTAMP(de.date) as date, 
                         de.nom_court, 
@@ -231,7 +231,7 @@ function evaluations_modifiables() {
   return $table_evaluations;
 }
 
-/** Renvoie les notes pour un groupe d'élèves
+/** Renvoie les notes pour un groupe d'Ã©lÃ¨ves
  *
  * $tableau_notes[$index] = array('login' =>$eleves['login'], 'index' => $index, 'eleve' => $eleves, 'notes' => $notes_eleves);
  * 
@@ -239,23 +239,23 @@ function evaluations_modifiables() {
  * 
  * $index : Ligne du tableau
  * 
- * $eleves : les données d'un élèves passée dans $groupe_eleves
+ * $eleves : les donnÃ©es d'un Ã©lÃ¨ves passÃ©e dans $groupe_eleves
  * 
  * $notes_eleves[cn_notes_devoirs.id_devoir] = array('id_devoir' => cn_notes_devoirs.id_devoir, 'note_devoir' => $note, 'comment_devoir' => cn_notes_devoirs.comment, 'statut' => cn_notes_devoirs.statut, 'new_note' => TRUE/FALSE)
  * 
- * @param array $groupe_eleves un tableau d'élèves
- * @param array $eval_valides un tableau d'évaluations
+ * @param array $groupe_eleves un tableau d'Ã©lÃ¨ves
+ * @param array $eval_valides un tableau d'Ã©valuations
  * @return array Le tableau de notes notes 
  * @see evaluations_modifiables()
  * @see trouveEleves()
  */
 function cherche_notes($groupe_eleves, $eval_valides) {
-  // Tableau des élèves et pour chacun, de ses notes
+  // Tableau des Ã©lÃ¨ves et pour chacun, de ses notes
   $tableau_notes=array();
   
   foreach ($groupe_eleves as $eleves) {
     $notes_eleves=array();
-    // on recherche toutes les notes de l'élève
+    // on recherche toutes les notes de l'Ã©lÃ¨ve
     foreach ($eval_valides as $evaluation) {
       $sql_notes = "SELECT * FROM cn_notes_devoirs 
                       WHERE login = '".$eleves['login']."'
@@ -299,9 +299,9 @@ function cherche_notes($groupe_eleves, $eval_valides) {
  
 }
 
-/** Enlève une évaluation du tableau de notes modifiables
+/** EnlÃ¨ve une Ã©valuation du tableau de notes modifiables
  * 
- * @param int $evaluation id de l'évaluation à cacher
+ * @param int $evaluation id de l'Ã©valuation Ã  cacher
  */
 function cacher_eval($evaluation) {
   $table_eval=array();
@@ -316,15 +316,15 @@ function cacher_eval($evaluation) {
 
 /** * Enregistre les notes dans la base
  * 
- * @param array $donnees Les données à enregistrer
- * @return bool TRUE si les données ont été enregistrées
+ * @param array $donnees Les donnÃ©es Ã  enregistrer
+ * @return bool TRUE si les donnÃ©es ont Ã©tÃ© enregistrÃ©es
  * @see charge_message()
  * @see prepare_sql()
  */
 function enregistre_notes($donnees) {
   $tableau_notes=$_SESSION[PREFIXE]['tableau_notes'];
     
-  // on recherche les notes maxi pour toutes les évaluations
+  // on recherche les notes maxi pour toutes les Ã©valuations
   $elv_deja_note=array();
   foreach ($_SESSION[PREFIXE]["id_devoir"] as $id_devoir) {
     
@@ -340,7 +340,7 @@ function enregistre_notes($donnees) {
   }
   unset ($id_devoir);
 
-  // On récupère les données passées en $_POST dans $tableau_notes
+  // On rÃ©cupÃ¨re les donnÃ©es passÃ©es en $_POST dans $tableau_notes
   while (list($key, $val) = each($donnees)) {
     if(mb_ereg("_note_", $key)) {
       $index=mb_strstr ( $key , "_note_" , TRUE );
@@ -350,7 +350,7 @@ function enregistre_notes($donnees) {
 
       if (is_numeric($val)) {
 	if($val > $notes_max[$id_eval]['note_sur']) {
-	  charge_message("ERREUR : Un élève à une note en dehors du référentiel ! (".$login.")") ;
+	  charge_message("ERREUR : Un Ã©lÃ¨ve Ã  une note en dehors du rÃ©fÃ©rentiel ! (".$login.")") ;
 	  return FALSE;	  
 	}
 	$note = $val;
@@ -394,7 +394,7 @@ function enregistre_notes($donnees) {
 	}
       }
       
-      // On met à jour $tableau_notes
+      // On met Ã  jour $tableau_notes
       $tableau_notes[$index]['notes'][$id_eval]['note_devoir'] = $note;
       $tableau_notes[$index]['notes'][$id_eval]['statut'] = $statut;
           
@@ -411,7 +411,7 @@ function enregistre_notes($donnees) {
   foreach ($tableau_notes as $ligne_tableau) {
     foreach ($_SESSION[PREFIXE]["id_devoir"] as $id_eval) {
       if ($ligne_tableau['notes'][$id_eval]['new_note']) {
-       // on crée une entrée
+       // on crÃ©e une entrÃ©e
        $sql_table="INSERT INTO cn_notes_devoirs (login, id_devoir, note, comment, statut)
                     VALUES ('".$ligne_tableau['login']."',
                       '".$ligne_tableau['notes'][$id_eval]['id_devoir']."',
@@ -419,7 +419,7 @@ function enregistre_notes($donnees) {
                       '".$ligne_tableau['notes'][$id_eval]['comment_devoir']."',
                       '".$ligne_tableau['notes'][$id_eval]['statut']."')";
       } else {
-	// on met à jour
+	// on met Ã  jour
         $sql_table="UPDATE cn_notes_devoirs
                   SET note = '".$ligne_tableau['notes'][$id_eval]['note_devoir']."',
                     statut= '".$ligne_tableau['notes'][$id_eval]['statut']."',
@@ -430,17 +430,17 @@ function enregistre_notes($donnees) {
       $query_table = mysql_query($sql_table);
        if (!$query_table) {
          charge_message("ERREUR : Erreur lors de l'enregistrement dans la base ! (".$index.")") ;
-         charge_message("<strong>Vérifiez vos données puis enregistrez à nouveau</strong>") ;
+         charge_message("<strong>VÃ©rifiez vos donnÃ©es puis enregistrez Ã  nouveau</strong>") ;
          return FALSE;	
        }
        
-       // on met à jour les moyennes de conteneurs
+       // on met Ã  jour les moyennes de conteneurs
         $_current_group["eleves"][$_SESSION[PREFIXE]['periode_num']]["list"][] = $ligne_tableau['login'];
         $arret='no';
         $sql_conteneur= "SELECT id_conteneur FROM cn_devoirs WHERE id = '".$ligne_tableau['notes'][$id_eval]['id_devoir']."'";  
         $query_conteneur = mysql_query($sql_conteneur);  
         if (!$query_conteneur) {
-          charge_message("ERREUR : Echec de la mise à jour des conteneurs") ;
+          charge_message("ERREUR : Echec de la mise Ã  jour des conteneurs") ;
           mysql_free_result($query_conteneur);
           return FALSE;	
         }
@@ -453,13 +453,13 @@ function enregistre_notes($donnees) {
   }
   unset ($ligne_tableau);
   
-  // Si on modifie un devoir alors que des notes ont été reportées sur le bulletin, il faut penser à mettre à jour la recopie vers le bulletin.
+  // Si on modifie un devoir alors que des notes ont Ã©tÃ© reportÃ©es sur le bulletin, il faut penser Ã  mettre Ã  jour la recopie vers le bulletin.
     $sql="SELECT 1=1 FROM matieres_notes 
             WHERE periode='".$_SESSION[PREFIXE]['periode_num']."'
               AND id_groupe='".$_SESSION[PREFIXE]['id_groupe_session']."';";
     $test_bulletin=mysql_query($sql);
     if(mysql_num_rows($test_bulletin)>0) {
-      charge_message("ATTENTION: Des notes sont présentes sur le bulletin.<br />Si vous avez modifié ou ajouté des notes, pensez à mettre à jour la recopie vers le bulletin.") ;
+      charge_message("ATTENTION: Des notes sont prÃ©sentes sur le bulletin.<br />Si vous avez modifiÃ© ou ajoutÃ© des notes, pensez Ã  mettre Ã  jour la recopie vers le bulletin.") ;
     }
     mysql_free_result($test_bulletin);
   
@@ -467,11 +467,11 @@ function enregistre_notes($donnees) {
   
 }
 
-/** Vérifie si une évaluation est déjà noté pour un utilisateur
+/** VÃ©rifie si une Ã©valuation est dÃ©jÃ  notÃ© pour un utilisateur
  *
  * @param text $login le login de l'utilisateur
- * @param int $id_eval Id de l"évaluation
- * @return bool TRUE si l'évaluation est déjà notée, FALSE sinon 
+ * @param int $id_eval Id de l"Ã©valuation
+ * @return bool TRUE si l'Ã©valuation est dÃ©jÃ  notÃ©e, FALSE sinon 
  */
 function note_existe($login , $id_eval) {
   // On recherche si l'enregistrement existe
@@ -484,7 +484,7 @@ function note_existe($login , $id_eval) {
     mysql_free_result($query);
     return FALSE;
   }else {
-    // on met à jour
+    // on met Ã  jour
     mysql_free_result($query);
     return TRUE;
   }
@@ -492,10 +492,10 @@ function note_existe($login , $id_eval) {
 
 }
 
-/** Récupère les notes d'une évaluation dans la base
+/** RÃ©cupÃ¨re les notes d'une Ã©valuation dans la base
  * 
- * @param int $id_evaluation L'id de l'évaluation
- * @return array|bool Toutes les notes d'une évaluation, FALSE + un message sinon
+ * @param int $id_evaluation L'id de l'Ã©valuation
+ * @return array|bool Toutes les notes d'une Ã©valuation, FALSE + un message sinon
  */
 function statistique($id_evaluation) {
   $tab_notes=array();
@@ -520,8 +520,8 @@ function statistique($id_evaluation) {
 }
 
 /**
- * Vérifie suhosin.post.max_vars, suhosin.post.max_totalname_length
- * @return boolean TRUE si les valeurs de $_POST sont inférieures à celle de suhosin
+ * VÃ©rifie suhosin.post.max_vars, suhosin.post.max_totalname_length
+ * @return boolean TRUE si les valeurs de $_POST sont infÃ©rieures Ã  celle de suhosin
  */
 function verifie_suhosin () {
   $nb_eleves = count($_SESSION['plugin_notes']['tableau_notes']);
@@ -538,13 +538,13 @@ function verifie_suhosin () {
 }
 
 /**
- * Vérifie si suhosin est activé
+ * VÃ©rifie si suhosin est activÃ©
  * 
- * Si suhosin est activé, vérifie que la valeur de la clé est compatible
+ * Si suhosin est activÃ©, vÃ©rifie que la valeur de la clÃ© est compatible
  * 
- * @param string $suhosin_cle Clé à tester
- * @param int $taille_post Taille envoyée
- * @return boolean TRUE si suhosin est activé
+ * @param string $suhosin_cle ClÃ© Ã  tester
+ * @param int $taille_post Taille envoyÃ©e
+ * @return boolean TRUE si suhosin est activÃ©
  */
 function verifie_cle_suhosin ($suhosin_cle, $taille_post) {
   //$tableau_suhosin = charge_tableau_suhosin();
@@ -556,18 +556,18 @@ function verifie_cle_suhosin ($suhosin_cle, $taille_post) {
     $min_suhosin_cle = min($val_suhosin,ini_get($cle_request));
     
     if ($taille_post > $min_suhosin_cle) {
-    // décommenter pour voir les valeurs de suhosin
+    // dÃ©commenter pour voir les valeurs de suhosin
     /* *
       charge_message($suhosin_cle.': '.$tableau_suhosin[$suhosin_cle].' - '.$cle_request.': '.$tableau_suhosin[$cle_request].' - '.$min_suhosin_cle) ;
       switch ($cle_request) {
         case 'suhosin.request.max_totalname_length':
-          charge_message('Taille maximale des indices passés en $_POST : '.$taille_post);
+          charge_message('Taille maximale des indices passÃ©s en $_POST : '.$taille_post);
           break;
         case 'suhosin.request.max_value_length':
-          charge_message('Taille des champs passés en $_POST : '.$taille_post);
+          charge_message('Taille des champs passÃ©s en $_POST : '.$taille_post);
           break;
         default :
-          charge_message('variables passées en $_POST : '.count($_POST).' - '.$taille_post);
+          charge_message('variables passÃ©es en $_POST : '.count($_POST).' - '.$taille_post);
       }    
     /* */
       return FALSE;
@@ -581,19 +581,19 @@ function verifie_cle_suhosin ($suhosin_cle, $taille_post) {
 /**
  * Renvoie des informations sur suhosin
  * 
- * tableau des valeurs ou FALSE si suhosin n'est pas activé
+ * tableau des valeurs ou FALSE si suhosin n'est pas activÃ©
  * 
  * $tab_suhosin=array('suhosin.cookie.max_totalname_length','suhosin.get.max_totalname_length','suhosin.post.max_totalname_length','suhosin.post.max_value_length','suhosin.request.max_totalname_length','suhosin.request.max_value_length','suhosin.request.max_vars');
  * - suhosin.cookie.max_totalname_length : longueur maximale du nom de la variable dans le cookie
- * - suhosin.get.max_totalname_length : longueur maximale du nom de la variable lorsqu'il est enregistré par l'URL
- * - suhosin.get.max_value_length : Définit la longueur maximale d'une variable qui est enregistré par l' URL
- * - suhosin.get.max_vars : Définit le nombre maximum de variables qui peuvent être enregistrés par l' URL
- * - suhosin.post.max_totalname_length : longueur maximale du nom de la variable lorsqu'il est enregistré par une requête POST
- * - suhosin.post.max_value_length : Définit la longueur maximale d'une variable qui est enregistré par le biais d'une requête POST
- * - suhosin.post.max_vars : Définit le nombre maximum de variables qui peuvent être enregistrés via une requête POST
- * - suhosin.request.max_totalname_length : Définit la longueur maximale des noms de variables pour les variables enregistrées dans le cookie, l' URL ou via une requête POST
- * - suhosin.request.max_value_length : (caractères) Définit la longueur maximale d'une variable qui est enregistré par le biais du cookie, l'URL ou via une requête POST
- * - suhosin.request.max_vars : Définit le nombre maximum de variables qui peuvent être enregistrés par le cookie, le URL ou via une requête POST
+ * - suhosin.get.max_totalname_length : longueur maximale du nom de la variable lorsqu'il est enregistrÃ© par l'URL
+ * - suhosin.get.max_value_length : DÃ©finit la longueur maximale d'une variable qui est enregistrÃ© par l' URL
+ * - suhosin.get.max_vars : DÃ©finit le nombre maximum de variables qui peuvent Ãªtre enregistrÃ©s par l' URL
+ * - suhosin.post.max_totalname_length : longueur maximale du nom de la variable lorsqu'il est enregistrÃ© par une requÃªte POST
+ * - suhosin.post.max_value_length : DÃ©finit la longueur maximale d'une variable qui est enregistrÃ© par le biais d'une requÃªte POST
+ * - suhosin.post.max_vars : DÃ©finit le nombre maximum de variables qui peuvent Ãªtre enregistrÃ©s via une requÃªte POST
+ * - suhosin.request.max_totalname_length : DÃ©finit la longueur maximale des noms de variables pour les variables enregistrÃ©es dans le cookie, l' URL ou via une requÃªte POST
+ * - suhosin.request.max_value_length : (caractÃ¨res) DÃ©finit la longueur maximale d'une variable qui est enregistrÃ© par le biais du cookie, l'URL ou via une requÃªte POST
+ * - suhosin.request.max_vars : DÃ©finit le nombre maximum de variables qui peuvent Ãªtre enregistrÃ©s par le cookie, le URL ou via une requÃªte POST
  * 
  * @return string|boolean le tableau ou false
  * @link http://www.hardened-php.net/suhosin/configuration.html

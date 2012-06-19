@@ -1,34 +1,34 @@
 ===== Changelog =====
 
 TODO :
-- en Admin pouvoir nettoyer cn_notes_devoirs des Èvaluations orphelines
+- en Admin pouvoir nettoyer cn_notes_devoirs des √©valuations orphelines
 
 version 0.2.3
 - Correction d'un bug sur la gestion des retours depuis la page supprime
 
 version 0.2.2
-- CrÈation automatique du carnet de notes s'il n'existe pas
+- Cr√©ation automatique du carnet de notes s'il n'existe pas
 - Correction d'un bug si on entrait des ' dans les commentaires
-- Ajout de javascript pour amÈliorer l'ergonomie
+- Ajout de javascript pour am√©liorer l'ergonomie
 - Documentation des fonctions (partiel)
 
 version 0.2.1
-- Ajout de javascript pour amÈliorer l'ergonomie
-- Modification de la fonction d'enregistrement des notes pour l'accÈlÈrer
-- VÈrifie si les bulletins sont dÈj‡ remplis lors de l'enregistrement des notes
-- Interdire la suppression d'une Èvaluation s'il y a dÈj‡ des notes
-- nettoyer cn_notes_devoirs de l'Èvaluation lors d'une suppression
+- Ajout de javascript pour am√©liorer l'ergonomie
+- Modification de la fonction d'enregistrement des notes pour l'acc√©l√©rer
+- V√©rifie si les bulletins sont d√©j√† remplis lors de l'enregistrement des notes
+- Interdire la suppression d'une √©valuation s'il y a d√©j√† des notes
+- nettoyer cn_notes_devoirs de l'√©valuation lors d'une suppression
 - correction calcul des statistiques dans la vue des notes
 
 version 0.2.0
-- ConformitÈ des pages avec rËgles WAI (accessibilitÈ)
-- Mise ‡ jour des conteneurs lors de l'ajout/modification des notes
+- Conformit√© des pages avec r√®gles WAI (accessibilit√©)
+- Mise √† jour des conteneurs lors de l'ajout/modification des notes
 
 version 0.1.0
-- Ajout crÈation d'une pÈriode identique ‡ la prÈcÈdente
-- PossibilitÈ de copier/coller des notes ou des apprÈciations pour une Èvaluation
-- ConformitÈ des pages avec rËgles W3C
+- Ajout cr√©ation d'une p√©riode identique √† la pr√©c√©dente
+- Possibilit√© de copier/coller des notes ou des appr√©ciations pour une √©valuation
+- Conformit√© des pages avec r√®gles W3C
 
 version 0.0.1
-- CrÈation des conteneurs
-- Saisie des notes avec possibilitÈ d'afficher plusieurs Èvaluations
+- Cr√©ation des conteneurs
+- Saisie des notes avec possibilit√© d'afficher plusieurs √©valuations

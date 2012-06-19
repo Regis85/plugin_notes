@@ -1,9 +1,9 @@
 <?php
-/** Vue du module évaluations : action supprimer
+/** Vue du module Ã©valuations : action supprimer
  * 
- * Supprimer un conteneur ou une évaluation
+ * Supprimer un conteneur ou une Ã©valuation
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage supprime
  * 
@@ -12,18 +12,18 @@
 
 <div id="container">
   <p class="invisible">
-    <a name='contenu' id="contenu">Début de la page</a>
+    <a name='contenu' id="contenu">DÃ©but de la page</a>
   </p>
 
 <p class="rouge center bold">
-  Vous avez demandé la suppression de :
+  Vous avez demandÃ© la suppression de :
   <br />
   <?php echo $donnees_supprime->type ; ?>
   ->
   <?php echo $donnees_supprime->nom_complet ; ?>
 </p>
 <p class="rouge center bold">
-  Êtes-vous sûr ?
+  ÃŠtes-vous sÃ»r ?
 </p>
 
 <form enctype="multipart/form-data" id= "form1" action="index.php" method="post">

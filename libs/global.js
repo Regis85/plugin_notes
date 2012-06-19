@@ -115,7 +115,7 @@ function verifie_note(num_id,noteMax) {
     if(((note.search(/^[0-9.]+$/)!=-1)&&(note.lastIndexOf('.')==note.indexOf('.',0)))||
   ((note.search(/^[0-9,]+$/)!=-1)&&(note.lastIndexOf(',')==note.indexOf(',',0)))){
       if((note>noteMax)||(note<0)){
-	alert (note+' : La note est hors référentiel (note maxi '+noteMax+')');
+	alert (note+' : La note est hors rÃ©fÃ©rentiel (note maxi '+noteMax+')');
 	document.getElementById('td_'+num_id).className="fond_rouge";
       }
       else{
@@ -123,7 +123,7 @@ function verifie_note(num_id,noteMax) {
       }
     }
     else{
-      alert (note+' : Caractère interdit dans le champ note');
+      alert (note+' : CaractÃ¨re interdit dans le champ note');
       document.getElementById('td_'+num_id).className="fond_rouge";
     }
   }

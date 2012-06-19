@@ -1,7 +1,7 @@
 <?php
-/** Page de style spécifique du plugin notes multiples
+/** Page de style spÃ©cifique du plugin notes multiples
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package global
  * @subpackage affichage 
  */
@@ -34,6 +34,6 @@
 <!-- ******************************************** -->
 
 <!-- ************************* -->
-<!-- Début du corps de la page -->
+<!-- DÃ©but du corps de la page -->
 <!-- ************************* -->
 <body onload="show_message_deconnexion();<?php if($tbs_charger_observeur) echo $tbs_charger_observeur;?>">

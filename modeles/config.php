@@ -1,11 +1,11 @@
 <?php
 /** Constantes du plugin notes multiples
  * 
- * Initialisation des constantes et du module à utiliser
+ * Initialisation des constantes et du module Ã  utiliser
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package global
- * @donnees $_SESSION['contexte_module'] Initialisation du module à utiliser
+ * @donnees $_SESSION['contexte_module'] Initialisation du module Ã  utiliser
  *
  */
 
@@ -34,11 +34,11 @@ define('ANNULER',        "annuler");
 define('CACHER',        "cacher");
 define('ABANDONNER',    "Abandonner");
 define('ENREGISTRER',   "Enregistrer");
-define('VERIFIER',      "Vérifier");
+define('VERIFIER',      "VÃ©rifier");
 
 if (!empty($_GET['module'])) {
   if (is_dir(CHEMIN_CONTROLEUR_GLOBAL.$_GET['module'])) {
-  // Module specifié ? On le récupère !
+  // Module specifiÃ© ? On le rÃ©cupÃ¨re !
     $_SESSION[PREFIXE]['contexte_module']=$_GET['module'];     
   } else {
     $_SESSION[PREFIXE]['contexte_module']=MODULE_DEFAUT;
@@ -59,7 +59,7 @@ define('CHEMIN_VUE',        'vues/'.$module.'/');
 define('CHEMIN_MODELE',     'modeles/'.$module.'/');
 define('CHEMIN_CONTROLEUR', 'controleurs/'.$module.'/');
 
-// Chemins dossiers spécifiques
+// Chemins dossiers spÃ©cifiques
 define('CHEMIN_RACINE',  '../../');
 define('CHEMIN_CAHIER_NOTES',  '../../cahier_notes/');
 define('CHEMIN_IMAGES',   CHEMIN_RACINE.'images/');
@@ -67,7 +67,7 @@ define('CHEMIN_PLUGIN',   CHEMIN_RACINE.'mod_plugins/');
 define('CHEMIN_GESTION',  CHEMIN_RACINE.'gestion/');
 define('CHEMIN_GABARITS', CHEMIN_RACINE.'templates/origine/');
 
-// Identification de l'établissement
+// Identification de l'Ã©tablissement
 define('ETABLISSEMENT',  getSettingValue("gepiSchoolName"));
 define('RNE',            getSettingValue("gepiSchoolRne"));
 define('ANNEE',          getSettingValue("gepiYear"));
@@ -82,22 +82,23 @@ define('NON_NOTE', "-");
 define('VIDE', "v");
 define('NOTE', "");
 
-// Affichage des évaluations
+// Affichage des Ã©valuations
 define('CREATION',"creation");
-  define('EVALUATION',"evaluation");
-  define('CUMUL',"cumul");
-  define('MATIERE','matiere');
-  define('IDEM','idem');
+define('EVALUATION',"evaluation");
+define('CUMUL',"cumul");
+define('MATIERE','matiere');
+define('IDEM','idem');
 define('IMPORT',"import_export");
-  define('EXPORTER','exporter');
-  define('IMPORTER','importer');
+define('EXPORTER','exporter');
+define('IMPORTER','importer');
 define('SIGNALER',"signaler");
-  define('AFFECTATION',"affectation");
+define('AFFECTATION',"affectation");
 define('COLLER',"coller");
+define('DUPLIQUE',"duplique");
  
 // Actions de la page de saisie des notes
 define('VOIR_CARNET','Voir le carnet de notes');
-define('RETOUR_EVAL','Retour aux évaluations');
+define('RETOUR_EVAL','Retour aux Ã©valuations');
 define('FORCE_ENREGISTRE','Enregistrer');
 
 // Arrondi des moyennes

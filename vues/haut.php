@@ -4,10 +4,10 @@
 <?php
 /** Doctype du plugin notes multiples
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package global
  * @subpackage affichage 
  */
 ?>
 <head>
-<!-- on inclut l'entête -->
+<!-- on inclut l'entÃªte -->

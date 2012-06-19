@@ -2,18 +2,18 @@
 <?php
 /** Vue du module evaluations : action idem
  * 
- * Dupliquer l'organisation d'une période
+ * Dupliquer l'organisation d'une pÃ©riode
  * 
- * @author Régis Bouguin
+ * @author RÃ©gis Bouguin
  * @package arborescence
  * @subpackage idem
  * 
  */
 
-/** Affichage récursif des sous-conteneurs
+/** Affichage rÃ©cursif des sous-conteneurs
  *
  * @param type $sous_eval 
- * @todo vérifier si c'est différent de affiche_sous_conteneur
+ * @todo vÃ©rifier si c'est diffÃ©rent de affiche_sous_conteneur
  */
 function vue_sous_conteneur($sous_eval) {?>
   <li>
@@ -35,7 +35,7 @@ function vue_sous_conteneur($sous_eval) {?>
 <div id="container">
   <a name='contenu'></a>
 
-<h2>Copie de la structure du trimestre précédent.</h2>
+<h2>Copie de la structure du trimestre prÃ©cÃ©dent.</h2>
   
    <!-- Carnet de notes -->
   <?php if (isset ($_SESSION[PREFIXE]['id_groupe_session'])) { ?>
@@ -51,17 +51,17 @@ function vue_sous_conteneur($sous_eval) {?>
   <?php } ?>
 
 <p class="center">
-  Vous avez demandé la recopie de la structure de <?php echo getSettingValue('gepi_denom_boite'); ?>s 
-  de la période précédente. 
+  Vous avez demandÃ© la recopie de la structure de <?php echo getSettingValue('gepi_denom_boite'); ?>s 
+  de la pÃ©riode prÃ©cÃ©dente. 
 </p>
 <p class="center">
-  Si des <?php echo getSettingValue('gepi_denom_boite'); ?>s existent déjà, 
+  Si des <?php echo getSettingValue('gepi_denom_boite'); ?>s existent dÃ©jÃ , 
   <?php if (getSettingValue('gepi_denom_boite_genre')=='f') {
     echo "elles";
   } else {
     echo "ils";
   }
-?> ne seront pas supprimé<?php if (getSettingValue('gepi_denom_boite_genre')=='f') echo "e"; ?>s.
+?> ne seront pas supprimÃ©<?php if (getSettingValue('gepi_denom_boite_genre')=='f') echo "e"; ?>s.
 </p>
 
 <form enctype="multipart/form-data" action="index.php" id="form_nom" method="post">
@@ -81,14 +81,14 @@ function vue_sous_conteneur($sous_eval) {?>
     <?php vue_sous_conteneur($arborescence['futur']); ?>
 </ul>
     
-    <h3>Structure de la période précédente</h3>
+    <h3>Structure de la pÃ©riode prÃ©cÃ©dente</h3>
     
 <ul>
     <?php vue_sous_conteneur($arborescence['precedent']); ?>
 </ul>
     
     
-    <h3>Structure de la période actuelle</h3>
+    <h3>Structure de la pÃ©riode actuelle</h3>
     
 <ul>
     <?php vue_sous_conteneur($arborescence['actuel']); ?>
