@@ -17,7 +17,7 @@
 
   //==================================
   // Décommenter la ligne ci-dessous pour afficher les variables $_GET, $_POST, $_SESSION[PREFIXE] et $_SERVER pour DEBUG:
-   $affiche_debug=debug_var();
+  // $affiche_debug=debug_var();
 
   // vérifier que le prof peut noter le groupe
   
