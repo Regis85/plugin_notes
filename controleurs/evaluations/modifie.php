@@ -12,6 +12,34 @@
  * 
  */
  
+ 
+  
+/**
+ * On a des erreurs d'affectation, on appelle la page 
+ */
+if (isset($_POST['signaler']) && $_POST['signaler']=='affectation') {
+	/** 
+		echo $module.$action.'.php';
+		echo "<br /><br />";
+		echo "../../groupes/signalement_eleves.php?id_groupe=".$_SESSION['plugin_notes']['id_groupe_session']."&chemin_retour=../mod_plugins/plugin_notes/index.php";
+		echo "<br /><br />";
+		$affiche_debug=debug_var();
+		$affiche_debug=debug_var();
+	die();
+	*/
+ 
+	$groupe_session = $_SESSION['plugin_notes']['id_groupe_session'];
+	$periode_num = $_SESSION['plugin_notes']['periode_num'];
+	unset ($_SESSION['plugin_notes']);
+	$_SESSION['plugin_notes']['id_groupe_session'] = $groupe_session;
+	$_SESSION['plugin_notes']['periode_num'] = $periode_num;
+	//header("Location: ../../groupes/signalement_eleves.php?id_groupe=".$groupe_session."&chemin_retour=../accueil.php");
+	header("Location: ../../groupes/signalement_eleves.php?id_groupe=".$groupe_session."&chemin_retour=../mod_plugins/plugin_notes/index.php");
+	die();
+ 
+}
+
+ 
 /** 
  * Chargement du modele de la page
  *

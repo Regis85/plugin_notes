@@ -1,3 +1,6 @@
+Tous les fichiers et dossiers doivent être placés dans un dossier
+../mod_plugins/plugin_notes/
+
 ===== Changelog =====
 
 TODO :

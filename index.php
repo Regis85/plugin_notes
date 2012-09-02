@@ -83,7 +83,6 @@ if (getSettingValue("active_carnets_notes")!='y') {
     include $module.$action.'.php';
 
   } else {
-
     /** 
      * Par défaut, chargement de la page de vision
      *
